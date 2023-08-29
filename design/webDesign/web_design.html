@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Web Design almost comprehensive guide</title>
+	<link rel="stylesheet" href="./web_design.css">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville&family=Squada+One&display=swap" rel="stylesheet">
+<body>
+	Keep in mind these are just some stepping stone to get one familiar with design.<br>“Learn the rules like a pro, so you
+	can break them like an artist.” - Picasso
+	<!-- Favicon -->
+	Also I know it looks very ugly.
+	<div class="basic inset0">
+	<h1>Basic</h1>
+	<p>These are the fundamentals.</p>
+	<div class="inset1" class="basics laws">
+		<h2>The Laws</h2>
+		<p>There are many laws when it comes to UI/UX. But we will be touch just the bare essentials here.</p>
+			<div class="inset2">
+				<h3>Miller's Law</h3>
+				<p>Miller’s law teaches us to use chunking to organize content into smaller clusters to help users process, understand,
+					and memorize easily. The longer it is, the less of it people will read.</p>
+				<ul>
+					<li>Chunking Information: Break down complex information into smaller "chunks" or groups of related items. This
+						can help
+						users process and remember the content more effectively. For instance, when presenting a list of features,
+						divide them
+						into meaningful categories or groups of three to five items each.</li>
+
+					<li>Use Visual Hierarchy: Employ visual hierarchy to guide users' attention and help them understand the
+						relationships
+						between different pieces of content. Larger fonts, bold text, contrasting colors, and strategic placement
+						can all help
+						emphasize important information.</li>
+
+					<li>Progressive Disclosure: Instead of overwhelming users with a multitude of options or details all at once,
+						consider using
+						progressive disclosure. Start with essential information and provide options for users to delve deeper into
+						more
+						detailed content if they choose to.</li>
+
+					<li>Simplify Navigation: Limit the number of navigation options and categories to a manageable amount. If you
+						have a complex
+						website with numerous sections, consider using drop-down menus, subcategories, or search functionalities to
+						help users
+						find what they're looking for.</li>
+
+					<li>Clear and Concise Language: Use concise and straightforward language to convey your message. Avoid
+						unnecessary jargon
+						and complicated phrasing that can strain user's working memory.</li>
+
+					<li>Visual Aids: Incorporate visual aids such as icons, images, and diagrams to assist in conveying information
+						more
+						efficiently. Visual elements can enhance comprehension and reduce the cognitive load on users.</li>
+				</ul>
+			</div>
+			<div class="inset2">
+				<h3>Fitts' Law</h3>
+				<p>The time to acquire a target is a function of the distance to and size of the target.</p>
+			<ul>
+				<li>Touch targets should be large enough for users to accurately select them. - WCAG recommends <span class="note">minimum of 44 × 44 CSS px</span>.</li>
+				<li>Touch targets should have ample spacing between them. - google's material design recommends <span class="note">touch targets should be separated by 8 dp minimum</span>.</li>
+				<li>Touch targets should be placed in areas of an interface that allow them to be easily acquired - turns out people <span class="note">prefer to touch the middle of the screen</span> more than the edges.</li>
+			</ul>
+			</div>
+			<div class="inset2">
+				<h3>Jacob's Law</h3>
+				<p>Users spend most of their time on other sites, and they prefer your site to work the same way as all the other sites
+					they already know.</p>
+				<ul>
+					<li>Users will transfer expectations they have built around one familiar product to another that appears similar.</li>
+					<li>By leveraging existing mental models, we can create superior user experiences in which the users can focus on their tasks rather than on learning new models.</li>
+					<li>When making changes, minimize discomfort by empowering users to continue using a familiar version for a limited time.</li>
+				</ul>
+			</div>
+			<div class="inset2">
+				<h3>Doherty Threshold</h3>
+				<p>Productivity soars when a computer and its users interact at a pace ( &#60;400 ms) that ensures that neither has to
+					wait on the other.</p>
+				<ul>
+					<li>Provide system feedback within 400 ms in order to keep users’
+					attention and increase productivity.</li>
+					<li>Use perceived performance to improve response time and reduce
+					the perception of waiting.</li>
+					<li>Animation is one way to visually engage people while loading or
+					processing is happening in the background.</li>
+					<li>Progress bars help make wait times tolerable, regardless of their
+					accuracy.</li>
+					<li>Purposefully adding a delay to a process can actually increase its
+					perceived value and instill a sense of trust, even when the process
+					itself actually takes much less time.</li>
+				</ul>
+			</div>
+			<div class="inset2">
+				<h3>Law of Proximity/ Similarity/ Common Region/ Continuity</h3>
+				<p>Place elements that belong together closer to one another. Similar elements are perceived as belonging together.
+				Use similar color, spacing and size for such elements. Try to put to well defined border around the similar elements.</p>
+			</div>
+			<div class="inset2">
+				<h3>Law of Closure</h3>
+				<p>Refers to the human tendency to perceive incomplete or fragmented visual elements as complete objects. In terms of web
+				design, the law of closure suggests that users will mentally fill in the gaps and complete shapes or patterns that are
+				not fully defined. This principle can be applied to create visually pleasing and intuitive web interfaces.</p>
+			</div>
+			<div class="inset2">
+				<h3>Law of Figure and Ground</h3>
+				<p>Visuals are either a figure or as a background element. Design pages with clear foreground and
+				background, this helps users
+				decide what to focus on.</p>
+			</div>
+			<div class="inset2">
+				<h3>Law of symmetry</h3>
+				<p>Humans prefer symmetry and that's why they call you ugly.
+				Symmetry creates an impression of stability and order and can also support a clear structure of content.</p>
+			</div>
+		<p>Hungry for more? Treat yourself with <a alt="takes you to the lawsofux.com website" href="https://lawsofux.com/" rel="noopener" target="_blank">LawsOfUx.com</a></p>
+	</div>
+
+
+
+		<div class="inset1" class="basics Accessibility">
+			<h2>Accessibility</h2>
+			<p>The internet is a crucial part of modern life, providing access to information, services, education,
+				entertainment, and
+				more. Ensuring that websites are accessible allows people with disabilities to participate fully in online
+				activities,
+				promoting equal access and inclusivity. The Web Content Accessibility Guidelines (WCAG) provide a globally
+				recognized framework for creating accessible web
+				content.</p>
+			<div class="inset2">
+				<h3>Color Contrast</h3>
+				<p>The World Wide Web Consortium (2016) recommends a contrast ratio of at least 4.5:1 to the background for
+					small texts and a contrast ratio of at least 3:1 for large texts (from 14 pt bold /18 pt normal print). The
+					contrast can be checked, for example, on the website
+					<a alt="takes you to a website called contrastchecker.com" href="https://contrastchecker.com/" rel="noopener" target="_blank">contrastchecker.com</a></p>
+			</div>
+			<div class="inset2">
+				<h3>Appropriate Line Spacing and Letter-Spacing</h3>
+				<p>The appropriate line spacing (also known as line height) and letter spacing (also known as tracking) for a
+					website's text can have a significant impact on its readability and accessibility.</p>
+					<h4>Line Spacing (Line Height)</h4>
+					<p>Lines that are excessively long can be challenging to read because readers struggle to trace back to the
+						start of the next line. Conversely, overly short lines can create a disjointed reading experience, prompting readers to skip back and forth frequently.<span class="note"> The ideal line length typically falls between 50 to 75 characters per line, including spaces.</span> This range is considered optimal for most reading scenarios, as it allows readers to easily follow the text without losing their pace.</p>
+					<ul>
+						<li><span class="note">Avoid Crowded Text:</span> Line spacing should be generous enough to prevent text from feeling crowded or cramped. This makes it easier for users to distinguish between lines of text.</li>
+						<li>Balanced Spacing: Aim for a balance between too much and too little line spacing. Too much spacing can make it challenging for users to connect lines of text, while too little spacing can cause lines to blend together.</li>
+						<li>Readability: Ensure that lines of text do not overlap or touch each other, as this can impede readability.</li>
+						<li>Consistency: Maintain consistent line spacing throughout your website for a harmonious reading experience. In general, a line spacing of 1.4 to 1.6 times the font size is a common guideline to follow.</li>
+					</ul>
+
+					<h4>Letter Spacing (Tracking)</h4>
+					<ul>
+						<li>Avoid Excessive Tracking: Letter spacing that is too wide can make text difficult to read, as words lose their cohesion and become disjointed.</li>
+
+						<li>Natural and Readable: Aim for a letter spacing that maintains the natural flow of words while providing a little extra room between letters for clarity.</li>
+
+						<li>Font Consideration: Some fonts inherently require more or less letter spacing due to their design. Choose fonts that are designed with readability in mind, and adjust letter spacing accordingly.</li>
+
+						<li>Consistency: As with line spacing, maintain a consistent letter spacing across your website's text to create a cohesive visual experience.</li>
+					</ul>
+				</div>
+				<div class="inset2">
+				<h3>Minimum Font size</h3>
+				<p>Text should have a <span class="note">minimum font size of 16 pixels (roughly 12 points)</span> for body
+					text. This ensures that most users,including those with mild visual impairments, can read the text without
+					needing to zoom in.<br> <span class="note">Use relative units like percentages (%) or "em" units</span>
+					instead of fixed pixel values for font sizes. This enables the font to adjust proportionally to the user's
+					preferred text size settings.</p>
+				</div>
+
+				<p><a alt="takes you to web.dev typography page"
+						href="https://web.dev/learn/design/typography/" rel="noopener" target="_blank">web.dev/learn/design/typography</a></p>
+			</div>
+
+	<div class="inset1" class="basics Compatibility">
+		<h2>Compatibility</h2>
+		<p>If it is an e-commerce site then it should be designed to work on all devices available without breaking
+			anything. However if it is a education site and provide hand's on learning there will be a level of complexity
+			that can't be abstracted away (Tesler’s Law), in that case you can keep the website limited to desktop
+			experience.</p>
+		<div class="inset2">
+			<h3>On the Grid</h3>
+			<p>What is Grid? <a alt="link takes you to css-tricks tutorial website"
+					href="https://css-tricks.com/snippets/css/complete-guide-grid/" rel="noopener" target="_blank">A
+					Complete Guide to CSS Grid</a></p>
+			<p>(More to come)</p>
+		</div>
+		<div class="inset2">
+			<h3>Breakpoints</h3>
+			<p>Breakpoints in web design refer to specific screen widths at which the layout of a website or web application adjusts to
+			provide an optimal user experience. These breakpoints are crucial for creating responsive designs that adapt to various
+			devices, screen sizes, and orientations. By defining breakpoints, you can ensure that your content remains readable and
+			usable across a wide range of devices, from smartphones to large desktop monitors. They are used to apply rules to elements such as Font Sizes, Navigation, Cropped or dynamically-resized Images & Videos.
+				<span class="note">Breakpoints are typically defined using media queries in CSS.</span>
+			</p>
+			<code>
+			/* extra small screens (up to 576px) */
+			<br>@media (max-width: 576px) {
+			/* CSS rules for Extra Small screens */
+			}
+
+			<br>/* small screens (577px to 768px) */
+			<br>@media (min-width: 577px) and (max-width: 768px) {
+			/* CSS rules for Small screens */
+			}
+
+			<br>/* medium screens (769px to 992px) */
+			<br>@media (min-width: 769px) and (max-width: 992px) {
+			/* CSS rules for Medium screens */
+			}
+
+			<br>/* Large screens (993px to 1200px) */
+			<br>@media (min-width: 993px) and (max-width: 1200px) {
+			/* CSS rules for large screens */
+			}
+
+			<br>/* Extra Large screens (1201px and above) */
+			<br>@media (max-width: 1201px) {
+			/* CSS rules for Extra Large screens */
+			}
+		</code>
+		</div>
+	</div>
+
+
+
+	<div class="inset1" class="basics Clarity">
+	<h2>Clarity</h2>
+	<p>What is the purpose of your website? What is the message you want to send? What is the action you want the visitors to perform?</p>
+	<div class="inset2">
+	<h3>Using white space</h3>
+	<p>White space refers to the negative space left intentionally to let the design breathe.</p>
+	<a href="https://bootcamp.uxdesign.cc/white-space-in-design-important-guidelines-every-designer-should-know-3efae5594e31" rel="noopener" target="_blank">This article puts it nicely together.</a>
+	</div>
+	<div class="inset2">
+	<h3>by size and placement</h3>
+	<p>Make the most important thing the largest and give it the most prominent position on the website. Using bold and catchy fonts like display fonts.</p>
+	</div>
+	<div class="inset2">
+	<h3>by color choice</h3>
+	<p>Using contrasting colors are great for calling attention to one over the other. We can use some colors sparingly to add emphasis to them (more in the 60-30-10 rule section).</p>
+	</div>
+	<div class="inset2">
+	<h3>by depth</h3>
+	<p>you can add depth to an object by ,adding fake shadows behind it, adding blur to the objects in the background and foreground, using layers.
+	</p>
+	</div>
+	<div class="inset2">
+	<h3>by reading patterns</h3>
+	<p>"There are four text-scanning patterns: the F-pattern, spotted, layer cake, and commitment patterns. Know that most users will read
+	very little from a wall of text; support them by chunking your content into sections and bulleted lists, by using
+	meaningful subheadings, and by special visual styling for keywords." - Nielsen Norman Group, Text Scanning Patterns: Eyetracking Evidence.</p>
+	<a href="https://www.nngroup.com/articles/text-scanning-patterns-eyetracking/" rel="noopener" target="_blank">Read about the research findings here.</a>
+	</div>
+	<div class="inset2">
+	<h3>by Proximity and reputation</h3>
+	<p>Move things closer or farther apart based on their relation to one another. Putting all related items together helps to view them as one group rather than several unrelated elements. Visitor should never have to work to put the information together.</p>
+	use the neuralink example.
+	<a href="https://www.presentationzen.com/chapter6_spread.pdf" rel="noopener" target="_blank">The Big Four: Contrast,Repetition, Alignment, Proximity</a>
+	</div>
+	<div class="inset2">
+		<h3>Accordions - hide supplementary content</h3>
+		<p>Accordions are a common UI pattern used in web design to hide and reveal content in a collapsible manner. They're
+		particularly useful when you have content that might be less important or supplementary, allowing users to focus on
+		what's essential while still providing access to additional information.</p>
+		<p>Commonly used for FAQs, Product Details and Descriptions, Tutorials and Documentation, User Profiles and Dashboards, Mobile Navigation, Privacy Policies and Terms of Service, Filters and Search Options.</p>
+		<ul>
+			<li><span class="note">Use Clear Titles</span> Provide clear and concise titles for each accordion section. The title should give users a hint about the content
+			within, helping them make informed decisions about whether to expand it.</li>
+			<li><span class="note">Mobile-Friendly Design</span> Accordions are especially useful on mobile devices where screen space is limited. They allow users to easily expand and
+			collapse content sections without overwhelming the screen.</li>
+			<li><span class="note">Animation and Indicators</span> Include a subtle animation when opening or closing an accordion section. Also, use visual indicators like arrows or "+"
+			and "-" signs to show which sections can be expanded or collapsed.</li>
+			<li><span class="note">Avoid Overuse</span> While accordions can help manage content, be cautious not to overuse them. If there's only a small amount of content in
+			an accordion, it might be better to display it without collapsing it.</li>
+			<li><span class="note">Maintain Accessibility</span> Ensure that the accordion interactions are accessible to all users, including those who use screen readers or keyboard
+			navigation. Use appropriate ARIA attributes to convey the state of the accordion to assistive technologies.</li>
+			<li><span class="note">Progressive Disclosure</span> Consider the concept of progressive disclosure, where you present information in layers. Users can access more detailed
+			information as they choose, which helps prevent overwhelming them with too much information at once.</li>
+		</ul>
+	</div>
+	<div class="inset2">
+		<h3>Color</h3>
+		<p>The colors used on a website should harmonize well with each other. Use <a
+				alt="link takes you to adobe's color-wheel website" href="https://color.adobe.com/create/color-wheel" rel="noopener" target="_blank">Adobe
+				Color wheel</a>, and <a href="https://realtimecolors.com/" rel="noopener" target="_blank">realtimecolors</a>.</p>
+		<h4>60-30-10 rule</h4>
+		<p>Adhere to the 60-30-10 guideline for direction.
+			As per this guideline, a layout should encompass 60% neutral color (such as the background), 30% contrasting color
+			(used
+			for headers, for example), and 10% accent color (employed in elements like call-to-action buttons). This division
+			not
+			only establishes a visual hierarchy but also fosters a harmonious color interplay.</p>
+		<h4>Harmonious Gradients</h4>
+		<p>For optimal results, stick to monochromatic or analogous colors for color transitions. When dealing with
+			complementary colors, seamless color progressions devoid of grayish patches can be accomplished by introducing a hue
+			that sits between the complementary colors on the color wheel.</p>
+	</div>
+	<div class="inset2">
+		<h3>Alignment</h3>
+		<p>Align objects with the edge of other objects to make them look clean and harmonious.</p>
+		<h4>Center Alignment</h4>
+		<p>for paragraph, keep it limited to one or two liner paragraphs.</p>
+
+		<h4>Left Alignment</h4>
+		<p>for paragraph, languages that read left to right should use this Alignment.</p>
+		<p></p>
+		<h4>Right Alignment</h4>
+		<p>for paragraph, languages that read right to left should use this Alignment.</p>
+		</ul>
+	</div>
+		<div class="inset2">
+			<h3>Symmetrical Balance</h3>
+			<p>balance is achieved by placing elements equally on either side of a central axis.</p>
+			<h3>Asymmetrical Balance</h3>
+			<p>involves skillfully arranging objects varying in size, color, or shape to achieve equilibrium in visual weight, even
+			with their differences. For instance, a sizable yet empty object can be counterbalanced by a smaller, but denser, filled
+			object. This type of balance imbues designs with a heightened sense of dynamism and intrigue, evoking feelings of motion
+			and vitality, which often surpass the static nature of symmetrical balance.</p>
+			<h3>Radial</h3>
+			<p>Generating radial balance requires the establishment of a focal point, around which the remaining elements find
+			equilibrium. This can be accomplished by arranging objects, colors, or textures at equidistant intervals from the
+			center, or by orchestrating a spiral pattern that either converges toward or diverges from the central point. As the
+			focal point garners the most attention, web designers frequently designate it for pivotal components like CTAs or other
+			essential clickable elements.
+
+			<br>Notably, radial balance finds its application in pricing pages, effectively spotlighting a specific pricing model.
+			Designers commonly employ variations in size or color to emphasize the central point. This approach echoes Hick's law,
+			asserting that the time spent making a decision is directly linked to the number of available choices.</p>
+		</div>
+	</div>
+
+
+	<div class="inset1" class="basics identity">
+	<h2>Identity</h2>
+	<p>What sets a website apart? How come we can instantly recognize an openAI or nothing webpage without even looking at the url or their logo on the page? Because they have an properly established brand identity. That is out of our scope, something for the brand strategist to tackle. (there may or mayn't be an article on this in the future.)</p>
+
+		</div>
+	</div>
+
+</body>
+
+</html>
