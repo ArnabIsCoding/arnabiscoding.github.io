@@ -1,0 +1,33 @@
+body{
+    padding: 10px;
+    background-color: #212121;
+    font-family: 'JetBrains Mono', monospace;
+}
+ul{
+    list-style-type: none;
+}
+li{
+	padding: 10px 0px 0px 0px;
+}
+a{
+    text-decoration: none;
+}
+a:hover{
+    text-decoration:underline;
+}
+div{
+    color: #f2f2f2;
+}
+.question{
+    color: #39FF14;
+}
+.answer{
+    color:#FFFF00;
+}
+.note{
+    color:red!important;
+}
+.line_through{
+	text-decoration: line-through;
+	text-decoration-color: #ff0000;
+}

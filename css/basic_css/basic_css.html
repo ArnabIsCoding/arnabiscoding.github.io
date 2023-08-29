@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@100;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./basic_css.css">
+</head>
+<body>
+    <div class="l1">
+        <h1>Adding the CSS</h1>
+        <h2>The Inline method</h2>
+        <p>Inline styles have the highest specificity, they override any conflicting styles defined in external stylesheets or embedded styles. Provides flexibility in situations where you want to style a single element uniquely.</p>
+        <code>&lt;p style="color:#ff0000"&gt;&lt;/p&gt;</code>
+		<p class="note">Try not to use Inline method as it makes it really hard to write maintainable and scalable code.</p>
+        <h2>The &lt;style&gt; tag</h2>
+        <p>AKA, embedded style. Does the same thing as Inline method but at the scope of an HTML page instead of only a single element.</p>
+        <p class="question">Where to put the style tag and it's content?</p>
+        <p class="answer"> Inside the &lt;head&gt; as it ensures that the CSS rules are loaded and applied before the content of the page is rendered.</p>
+<code>
+            &lt;!DOCTYPE html&gt;
+            <br>&lt;html lang="en"&gt;
+            <br>&lt;head&gt;
+            <br>&lt;meta charset="UTF-8"&gt;
+            <br>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+            <br>&lt;title&gt;Document&lt;/title&gt;
+            <br><p class="note">
+            &lt;style&gt;
+            <br>    p{
+            <br>        color:red;
+            <br>    }
+            <br>&lt;/style&gt;</p>
+            &lt;/head&gt;
+            <br>&lt;body&gt;
+            <br>&lt;p&gt; foo &lt;/p&gt;
+            <br>&lt;/body&gt;
+            <br>&lt;/html&gt;
+</code>
+        <h2>The &lt;link&gt; tag</h2>
+        <p>AKA, external stylesheet. This is the ultimate method when it comes to code reusability. Same styles can be reused in several HTML pages making it scalable. Allows a clear separation of HTML structure and CSS presentation. This promotes better organisation and maintainability of code, making it easier to update styles without modifying HTML code.</p>
+        <p class="question">Is the &lt;link&gt; self closing or an empty tag?</p>
+        <p class="answer">According to<a href="https://www.codecademy.com/forum_questions/54e3beab9113cb3d09000fbf"> this</a>, it depends.</p>
+        <p>HTML 4 => &lt;link&gt;
+            <br>XHTML => &lt;link /&gt; => XML compliant
+            <br>HTML5 => &lt;link /&gt; => XML compliant</p>
+            <code>&lt;link rel="stylesheet" href="./style.css" /&gt;</code>
+        <p class="note">If you don't specify the 'rel' attribute HTML won't be able to interpret what type of object we are trying to import.</p>
+    </div>
+    <div>
+        <h1>Inheritance</h1>
+        <p>Certain properties of an element are passed down to its child elements from its parent element if the property is not explicitly defined for the element.</p>
+        <ul>List of properties that can be inherited.
+            <li><a href="https://developer.mozilla.org/docs/Web/SVG/Attribute/azimuth" rel="noopener" target="_blank">azimuth</a></li>
+            <li><a href="https://developer.mozilla.org/docs/Web/CSS/border-collapse" rel="noopener" target="_blank">border-collapse</a></li>
+            <li><a href="https://developer.mozilla.org/docs/Web/CSS/border-spacing" rel="noopener" target="_blank">border-spacing</a></li>
+            <li><a href="https://developer.mozilla.org/docs/Web/CSS/caption-side" rel="noopener" target="_blank">caption-side</a></li>
+            <li><a href="https://developer.mozilla.org/docs/Web/CSS/color" rel="noopener" target="_blank">color (inherited by default)</a></li>
+            <li><a href="https://developer.mozilla.org/docs/Web/CSS/cursor" rel="noopener" target="_blank">cursor (inherited by default)</a></li>
+            <li><a href="https://developer.mozilla.org/docs/Web/CSS/direction" rel="noopener" target="_blank">direction</a></li>
+            <li><a href="https://developer.mozilla.org/docs/Web/CSS/empty-cells" rel="noopener" target="_blank">empty-cells</a></li>
+            <li><a href="https://developer.mozilla.org/docs/Web/CSS/font-family" rel="noopener" target="_blank">font-family (inherited by default)</a></li>
+            <li><a href="https://developer.mozilla.org/docs/Web/CSS/font-size" rel="noopener" target="_blank">font-size (inherited by default)</a></li>
+            <li><a href="https://developer.mozilla.org/docs/Web/CSS/font-style" rel="noopener" target="_blank">font-style (inherited by default)</a></li>
+            <li><a href="https://developer.mozilla.org/docs/Web/CSS/font-variant" rel="noopener" target="_blank">font-variant</a></li>
+            <li><a href="https://developer.mozilla.org/docs/Web/CSS/font-weight" rel="noopener" target="_blank">font-weight (inherited by default)</a></li>
+            <li><a href="https://developer.mozilla.org/docs/Web/CSS/font" rel="noopener" target="_blank">font (inherited by default)</a></li>
+            <li><a href="https://developer.mozilla.org/docs/Web/CSS/letter-spacing" rel="noopener" target="_blank">letter-spacing</a></li>
+            <li><a href="https://developer.mozilla.org/docs/Web/CSS/line-height" rel="noopener" target="_blank">line-height (inherited by default)</a></li>
+            <li><a href="https://developer.mozilla.org/docs/Web/CSS/list-style-image" rel="noopener" target="_blank">list-style-image</a></li>
+            <li><a href="https://developer.mozilla.org/docs/Web/CSS/list-style-position" rel="noopener" target="_blank">list-style-position</a></li>
+            <li><a href="https://developer.mozilla.org/docs/Web/CSS/list-style-type" rel="noopener" target="_blank">list-style-type</a></li>
+            <li><a href="https://developer.mozilla.org/docs/Web/CSS/list-style" rel="noopener" target="_blank">list-style</a></li>
+            <li><a href="https://developer.mozilla.org/docs/Web/CSS/orphans" rel="noopener" target="_blank">orphans</a></li>
+            <li><a href="https://developer.mozilla.org/docs/Web/CSS/quotes" rel="noopener" target="_blank">quotes</a></li>
+            <li><a href="https://developer.mozilla.org/docs/Web/CSS/text-align" rel="noopener" target="_blank">text-align (inherited by default)</a></li>
+            <li><a href="https://developer.mozilla.org/docs/Web/CSS/text-indent" rel="noopener" target="_blank">text-indent</a></li>
+            <li><a href="https://developer.mozilla.org/docs/Web/CSS/text-transform" rel="noopener" target="_blank">text-transform (inherited by default)</a></li>
+            <li><a href="https://developer.mozilla.org/docs/Web/CSS/visibility" rel="noopener" target="_blank">visibility</a></li>
+            <li><a href="https://developer.mozilla.org/docs/Web/CSS/white-space" rel="noopener" target="_blank">white-space (inherited by default)</a></li>
+            <li><a href="https://developer.mozilla.org/docs/Web/CSS/widows" rel="noopener" target="_blank">widows</a></li>
+            <li><a href="https://developer.mozilla.org/docs/Web/CSS/word-spacing" rel="noopener" target="_blank">word-spacing</a></li>
+            </ul>
+            <p class="question">How to not inherit the property of the child elements?</p>
+            <p class="answer">Specify 'initial' to the property of the child.</p>
+            <code><br>    p{
+                <br>        color:initial;
+                <br>    }</code>
+            <p class="question">How to inherit the property that is not inherited by default?</p>
+            <p class="answer">Specify 'inherit' to the property of the child.</p>
+            <code><br>    p{
+                <br>        border:inherit;
+                <br>    }</code>
+    </div>
+	<div>
+		<h1>Color</h1>
+		<p>Use oklch()</p>
+	</div>
+    <div>
+        <h1>CASCADING nature of CSS</h1>
+		<p>CSS by definition stands for Cascading Style Sheets. It reads and applies the styles top to bottom, if any conflicts emerge it has a set of rules to prioritise which style to apply.</p>
+		<p><strong>BEHOLD! SPECIFICITY! </strong></p>
+		<span class="line_through">
+		<p class="question">Imagine a 4 bit array.</p>
+		<p class="answer">The `!important` is at 2^3 position. The #ID-selector is at 2^2 position. The Class selector is at 2^1 position. And finally the element selector is at 2^0 position.</p>
+		<p>So, if the rule is applied using a ID selector and specified as `!important` it's value in the array will be saved as '1100'. The value we get is in binary, we can convert this into a decimal value.</p>
+		<p>Next we need to know <span class="question">how is this rule specified?</span> If it is specified <span class="answer">inline, we'll multiply the value x1</span>. If <span class="answer"> embedded, we'll multiply x0.5</span>. If on an <span class="answer">external stylesheet, we'll multiply x0.33</span>.</p>
+		<p>Next we will <span class="question">determine where the rule is specified</span>? If it is specified at the <span class="question">very bottom</span> it will get <span class="answer">multiplied by x1</span> if at the <span class="question">very top</span> it will get <span class="answer">multiplied by x0.001</span>.</p>
+		<p>upon comparing the conflicting rules the one that yields the highest value get's applied.</p>
+		</span>
+		<p> <span class="question">^ I am probably missing something here, it doesn't work.</span> Like for example here.</p>
+		<style>
+			p.test{
+			color:violet;
+			}
+			p.test span{
+			color:blue;
+			}
+			#test span{
+			color:orange;
+			}
+		</style>
+		<p class="test" id="#test"><span>Hello</span></p>
+		<code>
+^^^^^^	The HTML = &lt;p class="test" id="#test"&gt;&lt;span&gt;Hello&lt;/span&gt;&lt;/p&gt;
+<br>The CSS = p.test{color:violet;} p.test span{color:blue;} #test span{color:orange;}
+		</code>
+		<p class="answer">It should be orange not blue! So just ignore this formula stuff I made up.</p>
+		<p>Meanwhile, use <a href="https://specificity.keegan.st/" rel="noopener" target="_blank">this</a> website to fa&fo.</p>
+		<p class="note">Try not to use the `!important` keyword as it makes it really hard to write maintainable css.</p>
+    </div>
+	<div>
+		<h1>Pseudo Classes</h1>
+		<p>AKA, state selectors. they are used to select and style elements based on their current state or relationship with other elements, without modifying
+		the HTML markup. Pseudo-classes are denoted by a colon (:) followed by the name of the pseudo-class.</p>
+		<ul><h2>Display state pseudo-classes</h2>
+			<p class="answer">enable the selection of elements based on their display states.</p>
+			<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/:fullscreen" rel="noopener" target="_blank">:fullscreen</a> Matches an element that is currently in fullscreen mode. Lets you configure your stylesheets to automatically adjust the size, style, or layout of content when elements switch
+			back and forth between fullscreen and traditional presentations.</li>
+			<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/:modal" rel="noopener" target="_blank">:modal</a> Matches an element that is in a state in which it excludes all interaction with elements outside it until the
+			interaction has been dismissed.
+</li>
+			<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/:picture-in-picture" rel="noopener" target="_blank">:picture-in-picture</a> Matches an element that is currently in picture-in-picture mode.
+</li>
+		</ul>
+		<ul><h2>Input pseudo-classes</h2>
+			<p class="answer">form elements, and enable selecting elements based on HTML attributes and the state that the field is in before and
+			after interaction.</p>
+			<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/:autofill" rel="noopener" target="_blank">:autofill</a> Matches when an &lt;input&gt; has been autofilled by the browser.
+</li>
+			<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/:enabled" rel="noopener" target="_blank">:enabled</a> Represents a user interface element that is in an enabled state.
+</li>
+			<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/:disabled" rel="noopener" target="_blank">:disabled</a> Represents a user interface element that is in a disabled state.
+</li>
+			<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/:read-only" rel="noopener" target="_blank">:read-only</a> Represents any element that cannot be changed by the user.
+</li>
+			<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/:read-write" rel="noopener" target="_blank">:read-write</a> Represents any element that is user-editable.
+</li>
+			<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/:placeholder-shown" rel="noopener" target="_blank">:placeholder-shown</a> Matches an input element that is displaying placeholder text. For example, it will match the placeholder attribute in
+			the &lt;input&gt; and &lt;textarea&gt; elements.</li>
+			<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/:default" rel="noopener" target="_blank">:default</a> Matches one or more UI elements that are the default among a set of elements.
+</li>
+			<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/:checked" rel="noopener" target="_blank">:checked</a> Matches when elements such as checkboxes and radio buttons are toggled on.
+</li>
+			<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/:indeterminate" rel="noopener" target="_blank">:indeterminate</a> Matches UI elements when they are in an indeterminate state.
+</li>
+			<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/:blank" rel="noopener" target="_blank">:blank</a> Matches a user-input element which is empty, containing an empty string or other null input.
+</li>
+			<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/:valid" rel="noopener" target="_blank">:valid</a> Matches an element with valid contents. For example, an input element with the type 'email' that contains a validly
+			formed email address or an empty value if the control is not required.</li>
+			<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/:invalid" rel="noopener" target="_blank">:invalid</a> Matches an element with invalid contents. For example, an input element with type 'email' with a name entered.
+</li>
+			<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/:in-range" rel="noopener" target="_blank">:in-range</a> Applies to elements with range limitations. For example, a slider control when the selected value is in the allowed
+			range.
+</li>
+			<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/:out-of-range" rel="noopener" target="_blank">:out-of-range</a> Applies to elements with range limitations. For example, a slider control when the selected value is outside the allowed
+			range.
+</li>
+			<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/:required" rel="noopener" target="_blank">:required</a> Matches when a form element is required.
+</li>
+			<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/:optional" rel="noopener" target="_blank">:optional</a> Matches when a form element is optional.
+</li>
+			<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/:user-invalid" rel="noopener" target="_blank"> :user-invalid</a> Represents an element with incorrect input, but only when the user has interacted with it.
+</li>
+		</ul>
+		<ul><h2>Linguistic pseudo-classes</h2>
+			<p class="answer">Reflect the document language and enable the selection of elements based on language or script direction.</p>
+			<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/:dir" rel="noopener" target="_blank">:dir()</a> The directionality pseudo-class selects an element based on its directionality as determined by the document language.
+</li>
+			<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/:lang" rel="noopener" target="_blank">:lang()</a> Select an element based on its content language.
+</li>
+		</ul>
+		<ul><h2>Location pseudo-classes</h2>
+			<p class="answer">reflect the document language and enable the selection of elements based on language or script direction.</p>
+			<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/:any-link" rel="noopener" target="_blank">:any-link</a> Matches an element if the element would match either :link or :visited.
+</li>
+			<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/:link" rel="noopener" target="_blank">:link</a> Matches links that have not yet been visited.
+</li>
+			<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/:visited" rel="noopener" target="_blank">:visited</a> Matches links that have been visited. Can be overridden by any subsequent user-action pseudo-classes like :hover and :active. Allowable CSS properties are color, background-color, border-color, border-bottom-color, border-left-color,
+			border-right-color, border-top-color, column-rule-color, outline-color, text-decoration-color, and text-emphasis-color.
+</li>
+			<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/:local-link" rel="noopener" target="_blank">:local-link</a> Matches links whose absolute URL is the same as the target URL. For example, anchor links to the same page.
+</li>
+			<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/:target" rel="noopener" target="_blank">:target</a> Matches the element which is the target of the document URL.
+</li>
+			<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/:target-within" rel="noopener" target="_blank">:target-within</a> Matches elements which are the target of the document URL, but also elements which have a descendant which is the target
+			of the document URL.
+</li>
+			<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/:scope" rel="noopener" target="_blank">:scope</a> Represents elements that are a reference point for selectors to match against.
+</li>
+		</ul>
+		<ul><h2>Resource state pseudo-classes</h2>
+			<p class="answer">apply to media that is capable of being in a state where it would be described as playing, such as a video.</p>
+			<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/:playing" rel="noopener" target="_blank">:playing</a> Represents a media element that is capable of playing when that element is playing.
+</li>
+			<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/:paused" rel="noopener" target="_blank">:paused</a> Represents a media element that is capable of playing when that element is paused.
+</li>
+
+		</ul>
+		<ul><h2>Time-dimensional pseudo-classes</h2>
+			<p class="answer">pseudo-classes apply when viewing something which has timing, such as a WebVTT caption track.</p>
+			<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/:current" rel="noopener" target="_blank">:current</a> Represents the element or ancestor of the element that is being displayed.</li>
+			<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/:past" rel="noopener" target="_blank">:past</a> Represents an element that occurs entirely before the :current element.</li>
+			<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/:future" rel="noopener" target="_blank">:future</a> Represents an element that occurs entirely after the :current element.</li>
+
+		</ul>
+		<ul>
+			<h2>Tree-structural pseudo-classes</h2>
+			<p class="answer">pseudo-classes relate to the location of an element within the document tree.</p>
+				<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/:root" rel="noopener" target="_blank">:root</a> Represents an element that is the root of the document. In HTML this is usually the &lt;html&gt; element.</li>
+				<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/:empty" rel="noopener" target="_blank">:empty</a> Represents an element with no children other than white-space characters.
+</li>
+				<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/:nth-child" rel="noopener" target="_blank">:nth-child</a> Uses An+B notation to select elements from a list of sibling elements.</li>
+				<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/:nth-last-child" rel="noopener" target="_blank">:nth-last-child</a> Uses An+B notation to select elements from a list of sibling elements, counting backwards from the end of the list.</li>
+				<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/:first-child" rel="noopener" target="_blank">:first-child</a> Matches an element that is the first of its siblings.</li>
+				<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/:last-child" rel="noopener" target="_blank">:last-child</a> Matches an element that is the last of its siblings.</li>
+				<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/:only-child" rel="noopener" target="_blank">:only-child</a> Matches an element that has no siblings. For example, a list item with no other list items in that list.</li>
+				<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/:nth-of-type" rel="noopener" target="_blank">:nth-of-type</a> Uses An+B notation to select elements from a list of sibling elements that match a certain type from a list of sibling
+				elements.</li>
+				<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/:nth-last-of-type" rel="noopener" target="_blank">:nth-last-of-type</a> Uses An+B notation to select elements from a list of sibling elements that match a certain type from a list of sibling
+				elements counting backwards from the end of the list.</li>
+				<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/:first-of-type" rel="noopener" target="_blank">:first-of-type</a> Matches an element that is the first of its siblings, and also matches a certain type selector.</li>
+				<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/:last-of-type" rel="noopener" target="_blank">:last-of-type</a> Matches an element that is the last of its siblings, and also matches a certain type selector.</li>
+				<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/:only-of-type" rel="noopener" target="_blank">:only-of-type</a> Matches an element that has no siblings of the chosen type selector.</li>
+
+		</ul>
+		<ul>
+			<h2>User action pseudo-classes</h2>
+			<p class="answer">require some interaction by the user in order for them to apply, such as holding a mouse pointer over an element.</p>
+				<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/:hover" rel="noopener" target="_blank">:hover</a> </li>
+				<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/:active" rel="noopener" target="_blank">:active</a> </li>
+				<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/:focus" rel="noopener" target="_blank">:focus</a> </li>
+				<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/:focus-visible" rel="noopener" target="_blank">:focus-visible</a> </li>
+				<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/:focus-within" rel="noopener" target="_blank">:focus-within</a> </li>
+
+		</ul>
+		<ul>
+			<h2>Functional pseudo-classes</h2>
+			<p class="answer">accept a selector list or forgiving selector list as a parameter.</p>
+				<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/:is" rel="noopener" target="_blank">:is()</a> </li>
+				<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/:not" rel="noopener" target="_blank">:not()</a> </li>
+				<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/:where" rel="noopener" target="_blank">:where()</a> </li>
+				<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/:has" rel="noopener" target="_blank">:has()</a> </li>
+
+		</ul>
+	</div>
+	<div>
+		<h1>Box Model</h1>
+		<p>Responsible for how elements are laid out on the page and how they relate to one another. The three main css properties at play here are <span class="answer">padding</span>, <span class="answer">border</span>, <span class="answer">margin</span>, <span class="answer">box-sizing</span>.
+		</p>
+		<style>
+			.bm1{
+				background-color:#FFFF00;
+				color:#212121;
+				width:250px;
+				height: 250px;
+			}
+			.bm2{
+				background-color:#39FF14;
+				color:#212121;
+				width:250px;
+				height: 250px;
+				padding: 10px;
+				border:15px solid blue;
+				margin: 20px;
+			}
+		</style>
+		<div class="bm1">Has no padding, border or margin.</div>
+		<div class="bm2">padding:10px;<br>border:15px solid blue;<br>margin: 20px;</div>
+		<ul><h2>Padding</h2>
+		<p>Controls the space between the content and the element's border. Transparent and can't be changed.</p>
+		<p>Example, <code>padding:5px 20px 10px 30px;</code></p>
+		<style>
+			.bmdp1{
+				background-color: #FFFF00;
+				color: #212121;
+				width: 100px;
+				height: 100px;
+				padding:5px 20px 10px 30px;
+			}
+		</style>
+		<div class="bmdp1">Example</div>
+		<p>Don't know much about padding? <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/padding">Here you go.</a></p>
+		<h2>Border</h2>
+		<p>Controls the space around the element. Transparent by default, can be changed. </p>
+		<p>Example,</p><code>border: 20px dotted red;</code>
+		<style>
+			.bmdb1 {
+				background-color: #FFFF00;
+				color: #212121;
+				width: 100px;
+				height: 100px;
+				border: 20px dotted red;
+			}
+		</style>
+		<div class="bmdb1">Example</div>
+		<p>Don't know much about border? <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/border">Here you go.</a>
+		</p>
+		<h2>Margin</h2>
+		<p>Allows us to space out different elements from one another. Transparent and can't be changed. <span class="note">It doesn't add margin values it collapses to the highest of the two adjacent element's values.</span></p>
+		<p>Example,<code>margin: 20px;</code> and <code>margin: 30px;</code></p>
+		<style>
+			.bmdm1 {
+				background-color: #FFFF00;
+				color: #212121;
+				width: 100px;
+				height: 100px;
+				margin: 20px;
+			}
+			.bmdm2{
+				background-color: #39FF14;
+				color: #212121;
+				width: 100px;
+				height: 100px;
+				margin: 30px;
+			}
+		</style>
+		<div class="bmdm1">Example</div>
+		<div class="bmdm2">Example</div>
+		<p>The final margin value between both divs are <code>margin:30px;</code> not 20+30 = 50px.</p>
+		<p>Don't know much about margin? <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/margin">Here you go.</a>
+			<h2>Box-sizing</h2>
+			<style>
+				.bmbs1{
+					background-color: #39FF14;
+					color: #212121;
+					width:100px;
+					height:100px;
+					padding: 20px;
+					border:20px;
+					margin:20px;
+				}
+				.bmbs2{
+					background-color: #FFFF00;
+					color: #212121;
+					width:100px;
+					height:100px;
+					padding: 20px;
+					border:20px;
+					margin:20px;
+				}
+			</style>
+			<div class="bmbs1">Box1</div>
+			<div class="bmbs2">Box2</div>
+			<p class="question">If you inspect the above two boxes you will find they take up 140x140 space but their specified size is 100x100. This happens because the 20px of padding as well as the 20px of border is getting added into the area.</p>
+			<p>To fix this we have to use the `box-sizing` property.</p>
+			<p class="answer">We have to change it from `box-sizing:content-box` which is the default value to `box-sizing: border-box`.</p>
+			<p>How it works is that with `content-box` the padding and border size gets added to the height and width, in this case 100+20+20=140. but in `border-box` all those get included in the 100px of the width and height, so 100-20-20= 40px only is left for the content.</p>
+			<style>
+				.bmbs3 {
+					background-color: #39FF14;
+					color: #212121;
+					width: 100px;
+					height: 100px;
+					padding: 20px;
+					border: 20px;
+					margin: 20px;
+					box-sizing: border-box;
+				}
+
+				.bmbs4 {
+					background-color: #FFFF00;
+					color: #212121;
+					width: 100px;
+					height: 100px;
+					padding: 20px;
+					border: 20px;
+					margin: 20px;
+					box-sizing: border-box;
+				}
+			</style>
+			<div class="bmbs3">Box1</div>
+			<div class="bmbs4">Box2</div>
+		</ul>
+		<p>Read <a href="https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/The_box_model">this</a> to learn more in depth.</p>
+	</div>
+</body>
+</html>
