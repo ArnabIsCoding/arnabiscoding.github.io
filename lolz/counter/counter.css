@@ -1,0 +1,55 @@
+* {
+	box-sizing: border-box;
+	margin: 0px;
+	padding: 0px;
+}
+body{
+	background-color: #f1f5f8;
+}
+
+.container {
+	height: 100vh;
+	width: 100vw;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.container h1 {
+	margin: 30px;
+}
+
+.counter {
+	width: 30%;
+	display: flex;
+	justify-content: center;
+}
+
+#increment-btn,
+#decrement-btn,
+#reset {
+	height: 50px;
+	width: 120px;
+	border-radius: 10px;
+	font-size: 90%;
+	background-color: #f1f5f8;
+	border: 2px solid black;
+	color: black;
+	margin: 20px;
+}
+#increment-btn{
+	border: 2px solid #326abd;
+}
+#reset {
+	font-size: 20px;
+}
+
+#counter-value {
+	min-width: 50%;
+	font-size: 1000%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color:#008000;
+}
