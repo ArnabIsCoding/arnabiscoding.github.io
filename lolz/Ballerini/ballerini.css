@@ -58,12 +58,12 @@ body {
 	padding-top: 5rem;
 }
 
-.left-subcontainer,h1 {
+.left-subcontainer>h1 {
 	color: var(--color-primary-light);
 	font-size: 3rem;
 }
 
-.left-subcontainer,h3 {
+.left-subcontainer>h3 {
 	color: var(--color-primary);
 	font-size: 1.1rem;
 	margin-top: 1rem;
@@ -103,7 +103,7 @@ body {
 	padding-top: 1rem;
 }
 
-.item,img {
+.item>img {
 	margin-top: 1rem;
 	width: 20%;
 	height: 40%;
