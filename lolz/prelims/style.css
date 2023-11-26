@@ -1,0 +1,131 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	background: #f5f5f5;
+	height: 100%;
+    font-family: 'Syncopate', sans-serif;
+    overflow: hidden;
+    padding: 10px;
+}
+
+:root {
+	--color-primary: #0d0d0d;
+    --color-secondary: #646464;
+}
+
+header {
+    width: 100%;
+    margin-bottom: 10px;
+    /* height: 10px; */
+  }
+  #logo {
+    float: left;
+    height:5%;
+    width: 5%;
+  }
+  nav {
+    float: right;
+  }
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+  }
+  li {
+    float: left;
+  }
+  li a {
+    display: block;
+    color: var(--color-secondary);
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
+  li a:hover {
+    color: #79ab58;
+  }
+
+.left {
+	display: flex;
+	justify-content: space-around;
+	width: 20%;
+}
+
+.right {
+	justify-content: center;
+	padding-top: 1rem;
+}
+
+.links {
+	display: flex;
+	justify-content: space-between;
+	list-style: none;
+}
+
+.link {
+	margin-left: 1.5rem;
+	text-align: center;
+}
+
+.link>a {
+	text-decoration: none;
+	color: var(--color-primary);
+}
+
+.container {
+	display: flex;
+	justify-content: space-evenly;
+    margin-top: 2%;
+}
+
+.left-subcontainer {
+	padding-top: 5rem;
+	justify-content: space-evenly;
+    width: 40%;
+}
+
+.left-subcontainer>h1 {
+	font-size: 3rem;
+    margin-top: 0px;
+    padding-bottom: 1.2rem;
+}
+.left-subcontainer>h3 {
+	font-size: 1rem;
+    margin-bottom: 0px;
+}
+.left-subcontainer>p {
+    color: var(--color-secondary);
+padding-bottom: 4%;
+}
+.btn {
+	margin-top: 1rem;
+	padding: 0.5rem 1.5rem;
+	border: 1px  var(--color-primary);
+	border-radius: 100px;
+	background-color: #f5f5f5;
+	color: #0d0d0d;
+	font-size: 1.2rem;
+    filter: drop-shadow(0 0 35px #525151);
+	cursor: pointer;
+}
+.btn:hover  {
+    filter: drop-shadow(0 0 0.75rem #79ab58);
+}
+.person:hover{
+    transition: all .2s ease-in-out;
+    transform: scale(1.1);
+}
+.logo:hover{
+    transition: all .2s ease-in-out;
+    transform: scale(1.1);
+}
+@media screen and (max-width: 850px) {
+    .container{
+        display: inline;
+    }
+  }
+  
