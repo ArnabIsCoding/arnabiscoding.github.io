@@ -1,0 +1,12 @@
+body{
+	margin:0;
+}
+div.score{
+	position:fixed;
+	color:aliceblue;
+}
+div.footer{
+	bottom: 0;
+	left: 0;
+	width: 100%;
+}
