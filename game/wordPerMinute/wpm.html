@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Read Speed Test</title>
+    <style>
+		body{
+			margin:0;
+		}
+        #sentence-container {
+            margin: 10px;
+            padding: 5% 20%;
+            /* border: 1px solid #ccc; */
+            min-height: 50px;
+			align-items: center;
+			font-size: xx-large;
+        }
+
+        #wpm-score {
+            position: fixed;
+            /* top: 10px; */
+            /* right: 10px; */
+        }
+		#continue-btn {
+			margin-left: 50%;
+			color: antiquewhite;
+			background-color: blueviolet;
+			font-size: large;
+		}
+    </style>
+</head>
+<body>
+<div id="wpm-score">WPM: 0</div>
+<div id="sentence-container"></div>
+<button id="continue-btn">Continue</button>
+
+<script>
+let sentences = [
+"In the tapestry of existence, the threads of perception and reality intertwine, weaving the fabric of consciousness.",
+
+"The river of time flows ceaselessly, carrying the fragments of our choices and experiences, echoing the eternal dance of causality.",
+
+"Wisdom is the compass that guides the wanderer through the labyrinth of uncertainty, revealing the hidden paths of understanding.",
+
+"In the silent chambers of introspection, echoes of introspective thoughts reverberate, unlocking the secrets of the self.",
+
+"The canvas of morality is painted with the brushstrokes of empathy, kindness, and the nuanced hues of ethical deliberation.",
+
+"Reality is a symphony of perspectives, each note played by the observer contributing to the grand composition of existence.",
+
+"The pursuit of knowledge is a pilgrimage of the mind, with every question asked serving as a stepping stone on the path to enlightenment.",
+
+"The mirror of self-reflection reflects not only the surface but also the depths of one's soul, unveiling the profound truths hidden within.",
+
+"Philosophy is the alchemy of thought, transmuting the base elements of inquiry into the gold of profound understanding.",
+
+"The tree of wisdom bears fruits of both joy and sorrow, and only through tasting both can one savor the fullness of enlightenment."
+];
+
+let sentenceIndex = 0;
+let startTime, endTime;
+
+const sentenceContainer = document.getElementById("sentence-container");
+const continueBtn = document.getElementById("continue-btn");
+const wpmScore = document.getElementById("wpm-score");
+
+function displayRandomSentence() {
+    sentenceContainer.textContent = sentences[sentenceIndex];
+    startTime = new Date();
+}
+
+function calculateWPM() {
+    endTime = new Date();
+    const timeDiffInSeconds = (endTime - startTime) / 1000;
+    const words = sentences[sentenceIndex].split(' ').length;
+    const wpm = Math.round((words / timeDiffInSeconds) * 60);
+    wpmScore.textContent = `WPM: ${wpm}`;
+}
+
+function onNextSentenceClick() {
+    if (sentenceIndex < sentences.length - 1) {
+        sentenceIndex++;
+        displayRandomSentence();
+    } else {
+        alert("You have completed the test!" + wpmScore.textContent);
+    }
+}
+
+displayRandomSentence();
+
+continueBtn.addEventListener("click", () => {
+    calculateWPM();
+    onNextSentenceClick();
+});
+</script>
+
+</body>
+</html>
