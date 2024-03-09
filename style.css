@@ -1,6 +1,7 @@
 body{
 	margin: 0;
 	overflow: hidden;
+	z-index: 2;
 }
 #gradient-canvas {
 	position: relative;
@@ -12,14 +13,36 @@ body{
   --gradient-color-3: #3a9ca1;
   --gradient-color-4: #b9beff;
 }
+section{
+	position: absolute;
+	display: block;
+	margin: 20px;
+}
 h1{
 	padding: 0;
-	margin: 0;
-	position: absolute;
-	z-index: 2;
-	top: 90%;
 	font-size:200%;
 	font-weight: bold;
 	font-family: 'Courier New', Courier, monospace;
 	text-decoration: none;
 }
+ul li{
+	margin: inherit;
+	/* padding: inherit; */
+	list-style: none;
+}
+footer {
+	position: fixed;
+	bottom: 20px;
+	right: 20px;
+  }
+a {
+  color: #ffffff;
+  text-decoration: none;
+  margin: 0 10px 0 0;
+  transition: all 2s;
+}
+
+a:hover {
+  color: #ff4141;
+}
+
