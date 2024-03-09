@@ -2,16 +2,17 @@ body{
 	margin: 0;
 	overflow: hidden;
 	z-index: 2;
+	font-family: 'Courier New', Courier, monospace;
 }
 #gradient-canvas {
 	position: relative;
 	z-index: -100;
   width:100vw;
   height:100vh;
-  --gradient-color-1: #df5b43;
-  --gradient-color-2: #dbeb00;
-  --gradient-color-3: #3a9ca1;
-  --gradient-color-4: #b9beff;
+  --gradient-color-1: #aea8a7;
+  --gradient-color-2: #6f7342;
+  --gradient-color-3: #576d6e;
+  --gradient-color-4: #363749;
 }
 section{
 	position: absolute;
@@ -19,14 +20,18 @@ section{
 	margin: 20px;
 }
 h1{
+	color: #ffffff;
 	padding: 0;
 	font-size:200%;
 	font-weight: bold;
-	font-family: 'Courier New', Courier, monospace;
 	text-decoration: none;
 }
+ul{
+	margin: 0;
+	padding: 0 15px;
+}
 ul li{
-	margin: inherit;
+	margin: 20px 0;
 	/* padding: inherit; */
 	list-style: none;
 }
@@ -39,10 +44,11 @@ a {
   color: #ffffff;
   text-decoration: none;
   margin: 0 10px 0 0;
-  transition: all 2s;
+  transition: all 0.5s;
 }
 
 a:hover {
+	font-size:x-large;
   color: #ff4141;
 }
 
