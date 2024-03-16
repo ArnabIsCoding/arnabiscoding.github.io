@@ -18,6 +18,10 @@ section{
 	position: absolute;
 	display: block;
 	margin: 20px;
+  --gradient-color-1: #2d2c2c;
+  --gradient-color-2: #aeaeae;
+  --gradient-color-3: #2d2c2c;
+  --gradient-color-4: #aeaeae;
 }
 h1{
 	color: #ffffff;
@@ -51,4 +55,3 @@ a:hover {
 	font-size:x-large;
   color: #ff4141;
 }
-
