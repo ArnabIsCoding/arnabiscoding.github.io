@@ -43,7 +43,7 @@
         <h2>The &lt;link&gt; tag</h2>
         <p>AKA, external stylesheet. This is the ultimate method when it comes to code reusability. Same styles can be reused in several HTML pages making it scalable. Allows a clear separation of HTML structure and CSS presentation. This promotes better organisation and maintainability of code, making it easier to update styles without modifying HTML code.</p>
         <p class="question">Is the &lt;link&gt; self closing or an empty tag?</p>
-        <p class="answer">According to<a href="https://www.codecademy.com/forum_questions/54e3beab9113cb3d09000fbf"> this</a>, it depends.</p>
+        <p class="answer">According to<a href="https://www.codecademy.com/forum_questions/54e3beab9113cb3d09000fbf" rel="noopener" target="_blank"> this</a>, it depends.</p>
         <p>HTML 4 => &lt;link&gt;
             <br>XHTML => &lt;link /&gt; => XML compliant
             <br>HTML5 => &lt;link /&gt; => XML compliant</p>
@@ -97,7 +97,7 @@
     </div>
 	<div>
 		<h1>Color</h1>
-		<p>Use oklch()</p>
+		<p>Use oklch() <a alt="this link takes you to oklch.com" href="https://oklch.com/">oklch.com</a></p>
 	</div>
     <div>
         <h1>CASCADING nature of CSS</h1>
@@ -267,6 +267,353 @@
 
 		</ul>
 	</div>
+
+	<div>
+		<h1>Units</h1>
+		<p>there are various types of units that you can use to define measurements for properties like <span class="answer">length</span>, <span class="answer">width</span>, <span class="answer">margin</span>,
+		<span class="answer">padding</span>, <span class="answer">font size</span>, and more. These units can be broadly categorized into <span class="note">two main types: absolute units and relative
+		units.</span></p>
+		<ul>
+			<h2>absolute units</h2>
+			<p>are fixed measurements that are not dependent on the context or the size of other elements. They provide a consistent
+			size regardless of the device or screen resolution.</p>
+			<li><h3>Pixels (px)</h3>
+				<p>This is the most common absolute unit. One pixel represents a single dot on a screen. It's a fixed size and does not
+				change with screen size or resolution.</p>
+				<style>
+					.ump1 {
+						width: 50px;
+						border: 2px solid #39FF14;
+					}
+
+					.umc1 {
+						background-color: #FFFF00;
+						height: 16px;
+						margin: 2px 2px;
+					}
+				</style>
+				<div class="ump1">
+					<div class="umc1"></div>
+					<div class="umc1"></div>
+				</div>
+				<code>
+							^^^ reference,
+							<br>html= &lt;div class="unitMainParent"&gt;
+								&lt;div class="unitMainChild"&gt; &lt;/div&gt;
+								&lt;div class="unitMainChild"&gt; &lt;/div&gt;
+							&lt;/div&gt;
+							<br>css= .unitMainParent{
+							<span class="note">width: 50px;</span>
+							border: 2px solid #39FF14;
+							}
+							.unitMainChild{
+							background-color: #FFFF00;
+							height: 16px;
+							margin: 2px 2px;
+							}
+						</code>
+				</li>
+				<li><h3>Point (pt)</h3>
+				<p>Points are typically used for print media. One point is approximately 1/72nd of an inch, making it an absolute
+				measurement for print layouts.</p>
+				<style>
+					.ump2 {
+						width: 50pt;
+						border: 2pt solid #39FF14;
+					}
+
+					.umc2 {
+						background-color: #FFFF00;
+						height: 16pt;
+						margin: 2pt 2pt;
+					}
+				</style>
+				<div class="ump2">
+					<div class="umc2"></div>
+					<div class="umc2"></div>
+				</div>
+				<code>
+											^^^ reference,
+											<br>html= &lt;div class="unitMainParent"&gt;
+												&lt;div class="unitMainChild"&gt; &lt;/div&gt;
+												&lt;div class="unitMainChild"&gt; &lt;/div&gt;
+											&lt;/div&gt;
+											<br>css= .unitMainParent{
+											<span class="note">width: 50pt;</span>
+											border: 2pt solid #39FF14;
+											}
+											.unitMainChild{
+											background-color: #FFFF00;
+											height: 16pt;
+											margin: 2pt 2pt;
+											}
+										</code>
+				</li>
+				<li><h3>Pica (pc)</h3>
+				<p>A pica is equal to 12 points or 1/6th of an inch. Like points, picas are mainly used in print design.</p>
+				<style>
+					.ump3 {
+						width: 10pc;
+						border: 2pc solid #39FF14;
+					}
+
+					.umc3 {
+						background-color: #FFFF00;
+						height: 16pc;
+						margin: 2pc 2pc;
+					}
+				</style>
+				<div class="ump3">
+					<div class="umc3"></div>
+					<div class="umc3"></div>
+				</div>
+				<code>
+											^^^ reference,
+											<br>html= &lt;div class="unitMainParent"&gt;
+												&lt;div class="unitMainChild"&gt; &lt;/div&gt;
+												&lt;div class="unitMainChild"&gt; &lt;/div&gt;
+											&lt;/div&gt;
+											<br>css= .unitMainParent{
+											<span class="note">width: 10pc;</span>
+											border: 2pc solid #39FF14;
+											}
+											.unitMainChild{
+											background-color: #FFFF00;
+											height: 16pc;
+											margin: 2pc 2pc;
+											}
+										</code>
+				</li>
+		</ul>
+		<ul>
+			<h2>Relative units</h2>
+			<p>are measurements that are based on the size or characteristics of other elements or the viewport. They provide a
+			flexible way to create responsive designs that adapt to different screen sizes and devices.</p>
+			<li>
+				<h3>Percentage (%)</h3>
+				<p>Percentage units are relative to the size of the parent element. For example, setting a width of 50% on a div element
+				means it will be half the width of its parent container.</p>
+				<style>
+					.ump4 {
+						width: 50%;
+						border: 2px solid #39FF14;
+					}
+
+					.umc4 {
+						background-color: #FFFF00;
+						height: 10px;
+						margin: 2%;
+					}
+				</style>
+				<div class="ump4">
+					<div class="umc4"></div>
+					<div class="umc4"></div>
+				</div>
+				<code>
+						^^^ reference,
+						<br>html= &lt;div class="unitMainParent"&gt;
+							&lt;div class="unitMainChild"&gt; &lt;/div&gt;
+							&lt;div class="unitMainChild"&gt; &lt;/div&gt;
+						&lt;/div&gt;
+						<br>css= .unitMainParent{
+						<span class="note">width: 50%;</span>
+						border: 2px <span class="answer">(% can't be used for border)</span> solid #39FF14;
+						}
+						.unitMainChild{
+						background-color: #FFFF00;
+						height: 10px <span class="answer">(% can't be used for height)</span>;
+						margin: 2%;
+						}
+					</code>
+			</li>
+			<li>
+				<h3>Em (em)</h3>
+				<p>The "em" unit is relative to the font size of the nearest parent element or the element itself. If an element has a font
+				size of 1.5em, it's 1.5 times the font size of its parent.</p>
+				<style>
+					.ump5 {
+						width: 50em;
+						border: 2em solid #39FF14;
+					}
+
+					.umc5 {
+						background-color: #FFFF00;
+						height: 10em;
+						margin: 2%;
+					}
+				</style>
+				<div class="ump5">
+					<div class="umc5"></div>
+					<div class="umc5"></div>
+				</div>
+				<code>
+									^^^ reference,
+									<br>html= &lt;div class="unitMainParent"&gt;
+										&lt;div class="unitMainChild"&gt; &lt;/div&gt;
+										&lt;div class="unitMainChild"&gt; &lt;/div&gt;
+									&lt;/div&gt;
+									<br>css= .unitMainParent{
+									<span class="note">width: 50em;</span>
+									border: 2em solid #39FF14;
+									}
+									.unitMainChild{
+									background-color: #FFFF00;
+									height: 10em;
+									margin: 2%;
+									}
+								</code>
+			</li>
+			<li>
+				<h3>Rem (rem)</h3>
+				<p>Similar to "em," but it's relative to the root (html) element's font size. This makes it easier to manage and predict in
+				complex layouts.</p>
+				<style>
+					.ump6 {
+						width: 50rem;
+						border: 2rem solid #39FF14;
+					}
+
+					.umc6 {
+						background-color: #FFFF00;
+						height: 10rem;
+						margin: 2rem;
+					}
+				</style>
+				<div class="ump6">
+					<div class="umc6"></div>
+					<div class="umc6"></div>
+				</div>
+				<code>
+												^^^ reference,
+												<br>html= &lt;div class="unitMainParent"&gt;
+													&lt;div class="unitMainChild"&gt; &lt;/div&gt;
+													&lt;div class="unitMainChild"&gt; &lt;/div&gt;
+												&lt;/div&gt;
+												<br>css= .unitMainParent{
+												<span class="note">width: 50rem;</span>
+												border: 2rem solid #39FF14;
+												}
+												.unitMainChild{
+												background-color: #FFFF00;
+												height: 10rem;
+												margin: 2rem;
+												}
+											</code>
+			</li>
+			<li>
+				<h3>Viewport Percentage Units (vw, vh, vmin, vmax)</h3>
+				<p>These units are relative to the viewport (the browser window). They allow you to size elements based on a percentage of
+				the viewport's width (vw), height (vh), the smaller of the two (vmin), or the larger of the two (vmax).</p>
+				<style>
+					.ump7 {
+						width: 50vw;
+						border: 2vh solid #39FF14;
+					}
+
+					.umc7 {
+						background-color: #FFFF00;
+						height: 10vmin;
+						margin: 0.2vmax;
+					}
+				</style>
+				<div class="ump7">
+					<div class="umc7"></div>
+					<div class="umc7"></div>
+				</div>
+				<code>
+															^^^ reference,
+															<br>html= &lt;div class="unitMainParent"&gt;
+																&lt;div class="unitMainChild"&gt; &lt;/div&gt;
+																&lt;div class="unitMainChild"&gt; &lt;/div&gt;
+															&lt;/div&gt;
+															<br>css= .unitMainParent{
+															<span class="note">width: 50vw;</span>
+															border: 2vh solid #39FF14;
+															}
+															.unitMainChild{
+															background-color: #FFFF00;
+															height: 10vmin;
+															margin: 0.2vmax;
+															}
+														</code>
+			</li>
+			<li>
+				<h3>Ch</h3>
+				<p>The "ch" unit represents the width of the "0" character in the font being used. It's useful for creating text layouts
+				where each character has a consistent width.</p>
+				<style>
+					.ump8 {
+						width: 50ch;
+						border: 2ch solid #39FF14;
+					}
+
+					.umc8 {
+						background-color: #FFFF00;
+						height: 10ch;
+						margin: 0.2ch;
+					}
+				</style>
+				<div class="ump8">
+					<div class="umc8"></div>
+					<div class="umc8"></div>
+				</div>
+				<code>
+							^^^ reference,
+							<br>html= &lt;div class="unitMainParent"&gt;
+								&lt;div class="unitMainChild"&gt; &lt;/div&gt;
+								&lt;div class="unitMainChild"&gt; &lt;/div&gt;
+							&lt;/div&gt;
+							<br>css= .unitMainParent{
+							<span class="note">width: 50ch;</span>
+							border: 2ch solid #39FF14;
+							}
+							.unitMainChild{
+							background-color: #FFFF00;
+							height: 10ch;
+							margin: 0.2ch;
+							}
+						</code>
+			</li>
+			<li>
+				<h3>Ex</h3>
+				<p>The "ex" unit represents the height of the lowercase "x" character in the font. It's relative to the font size being
+				used.</p>
+				<style>
+					.ump9 {
+						width: 50ex;
+						border: 2ex solid #39FF14;
+					}
+
+					.umc9 {
+						background-color: #FFFF00;
+						height: 10ex;
+						margin: 0.2ex;
+					}
+				</style>
+				<div class="ump9">
+					<div class="umc9"></div>
+					<div class="umc9"></div>
+				</div>
+				<code>
+										^^^ reference,
+										<br>html= &lt;div class="unitMainParent"&gt;
+											&lt;div class="unitMainChild"&gt; &lt;/div&gt;
+											&lt;div class="unitMainChild"&gt; &lt;/div&gt;
+										&lt;/div&gt;
+										<br>css= .unitMainParent{
+										<span class="note">width: 50ex;</span>
+										border: 2ex solid #39FF14;
+										}
+										.unitMainChild{
+										background-color: #FFFF00;
+										height: 10ex;
+										margin: 0.2ex;
+										}
+									</code>
+			</li>
+		</ul>
+	</div>
+
 	<div>
 		<h1>Box Model</h1>
 		<p>Responsible for how elements are laid out on the page and how they relate to one another. The three main css properties at play here are <span class="answer">padding</span>, <span class="answer">border</span>, <span class="answer">margin</span>, <span class="answer">box-sizing</span>.
@@ -303,7 +650,7 @@
 			}
 		</style>
 		<div class="bmdp1">Example</div>
-		<p>Don't know much about padding? <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/padding">Here you go.</a></p>
+		<p>Don't know much about padding? <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/padding" rel="noopener" target="_blank">Here you go.</a></p>
 		<h2>Border</h2>
 		<p>Controls the space around the element. Transparent by default, can be changed. </p>
 		<p>Example,</p><code>border: 20px dotted red;</code>
@@ -317,7 +664,7 @@
 			}
 		</style>
 		<div class="bmdb1">Example</div>
-		<p>Don't know much about border? <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/border">Here you go.</a>
+		<p>Don't know much about border? <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/border" rel="noopener" target="_blank">Here you go.</a>
 		</p>
 		<h2>Margin</h2>
 		<p>Allows us to space out different elements from one another. Transparent and can't be changed. <span class="note">It doesn't add margin values it collapses to the highest of the two adjacent element's values.</span></p>
@@ -341,7 +688,7 @@
 		<div class="bmdm1">Example</div>
 		<div class="bmdm2">Example</div>
 		<p>The final margin value between both divs are <code>margin:30px;</code> not 20+30 = 50px.</p>
-		<p>Don't know much about margin? <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/margin">Here you go.</a>
+		<p>Don't know much about margin? <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/margin" rel="noopener" target="_blank">Here you go.</a>
 			<h2>Box-sizing</h2>
 			<style>
 				.bmbs1{
@@ -395,7 +742,29 @@
 			<div class="bmbs3">Box1</div>
 			<div class="bmbs4">Box2</div>
 		</ul>
-		<p>Read <a href="https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/The_box_model">this</a> to learn more in depth.</p>
+		<p>Read <a href="https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/The_box_model" rel="noopener" target="_blank">this</a> & <a href="https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/Box_Model_Tasks" rel="noopener" target="_blank">this</a> to learn more in depth.</p>
+	</div>
+	<div>
+		<h1>Buttons</h1>
+		<p>the &lt;button&gt; element is used to create a clickable button that can perform various functions when clicked by a user. The primary purpose of the &lt;button&gt; element is to trigger an action or event when clicked.</p>
+		<button onclick="btnbeworking()">This is the default button - has no css attribute added to it</button>
+		<button onclick="btnbeworking()" class="focus">focus button - has the ":focus" attribute added to it</button>
+		<style>
+			.bt1{
+				color:#212121;
+				background-color: #39FF14;
+			}
+			.bt2{
+				border: 2px solid #39FF14; /* 2px solid black border */
+			}
+		</style>
+		<button onclick="btnbeworking()" class="bt1">color button - css color attribute set to #212121 & background-color set to #39ff14</button>
+		<button onclick="btnbeworking()" class="bt2">border button - css border attribute set to 2px solid #39FF14</button>
 	</div>
 </body>
+<script>
+	function btnbeworking() {
+		alert("Button clicked!");
+	}
+</script>
 </html>
