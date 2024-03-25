@@ -209,9 +209,13 @@ a:hover {
 	font-size:x-large;
 	color: var(--color-1);
 }
-a.noo:hover{
+main a:hover{
 	font-size:initial;
 }
+
+a.viewrn {
+	text-decoration: underline;
+  } 
 /* Responsive Styles */
 @media (max-width: 768px) {
 	.menu {

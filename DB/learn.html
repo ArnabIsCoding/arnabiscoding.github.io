@@ -10,7 +10,8 @@
 	<link rel="stylesheet" href="style.css">
 	<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
 	<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-	<script src="learn.js" defer></script>
+	<!-- <script src="learn.js" defer></script> -->
+	<script src="./learn.js"></script>
 </head>
 
 <body>
@@ -22,12 +23,14 @@
 				<div id="mySidebar" class="sidebar">
 					<button href="javascript:void(0)" class="closebtn" onclick="closeNav()">◀</button>
 					<h1>INDEX</h1>
-					<a href="#probability">1.0 Probability</a>
-					<a href="#probability-sample-space">1.1 Sample space</a>
-					<a href="#Probability-density-function">1.2 PDF</a>
-					<a href="#parametric-modeling">1.3 Parametric modeling</a>
-					<a href="#Probability-likelihood">1.4 Likelihood</a>
-					<a href="#Probability-MLE">1.5 MLE</a>
+					<a target="_self" href="#1-0">Basics</a>
+					<a target="_self" href="#1-1">AuthZ vs AuthN</a>
+					<a target="_self" href="#1-2">SQL vs NoSQL</a>
+					<a target="_self" href="#1-3">Understanding Nosql records/documents</a>
+					<a target="_self" href="#1-4">JSON vs BSON https://www.mongodb.com/basics/bson</a>
+					<a target="_self" href="#1-5">Hands on MongoDB and Mongo-Express</a>
+					<a target="_self" href="#1-6">Hands on Mariadb and Adminer</a>
+					<a target="_self" href="#1-7">SQLite and https://sqlitebrowser.org</a>
 				</div>
 		</nav>
 		<button class="openbtn" onclick="openNav()">▶</button>
@@ -47,20 +50,56 @@
 				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed consequat, leo a bibendum sodales, augue
 					velit bibendum ex, a luctus libero nunc sed est.</p>
 				<a href="#" class="read-more">Read More</a>
+				<h3 id="probability-sample-space">Sample space</h3>
 			</article> -->
 			<article>
 				<h2>Introduction</h2>
 				<p>You can open the sidebar for index. I am learning myself so it will take a while to complete. The font used is called <a href="https://opendyslexic.org/" class="noo">opendyslexic</a>. If you find any misinformation on this website please let me know.</p>
 			</article>
 			<article>
-				<h2 id="probability">Probability</h2>
+				<h2 id="1-0">Basic</h2>
 				<p class="date">March 23, 2024</p>
-				<p>to understand the different families of generative models that will be introduced later</p>
-				<h3 id="probability-sample-space">Sample space</h3>
-				<h3 id="Probability-density-function">Probability density function</h3>
-				<h3 id="parametric-modeling">Parametric modeling</h3>
-				<h3 id="Probability-likelihood">Likelihood</h3>
-				<h3 id="Probability-MLE">Maximum likelihood estimation</h3>
+				<p>We will understand </p>
+				   <h3  id="1-1">AuthZ vs AuthN </h3>
+				   <p>
+					AuthN (Authentication) = it is the process of verifying the identity of a user or system. It confirms that the user or system is who they claim to be. This process typically involves presenting credentials, such as a username and password, and validating them against a database or authentication service. Authentication ensures that only authorized users gain access to resources or functionalities within an application. <br>
+					AuthZ (Authorization) = it is the process of determining what actions or resources a user is allowed to access within an application or system. Once a user's identity has been authenticated, authorization specifies the permissions and privileges associated with that identity. Authorization mechanisms enforce access control policies, ensuring that users can only perform actions or access resources that they are authorized to. Most common access is CRUD which stands for Create, read, Update & Delete. <br>
+					<a target="_blank" href="https://auth0.com/">Auth0?</a> = It is a platform that abstracts away much of the complexity of implementing authentication and authorization, offering developers ready-to-use solutions that can be easily integrated into their applications. <br>
+
+				   </p>
+				   <h3  id="1-2">SQL vs NoSQL </h3>
+				   <h3  id="1-3">Understanding Nosql records/documents </h3>
+				   <h3  id="1-4">JSON vs BSON https://www.mongodb.com/basics/bson </h3>
+				   <h3  id="1-5">Hands on MongoDB and Mongo-Express </h3>
+				   <p>
+					<a target="_blank" href="https://hub.docker.com/_/mongo">docker-compose image for MongoDB</a>
+					<pre>
+<code># Use root/example as user/password credentials
+	version: '3.1'
+	
+	services:
+	
+	  mongo:
+		image: mongo
+		restart: always
+		environment:
+		  MONGO_INITDB_ROOT_USERNAME: root
+		  MONGO_INITDB_ROOT_PASSWORD: example
+	
+	  mongo-express:
+		image: mongo-express
+		restart: always
+		ports:
+		  - 8081:8081
+		environment:
+		  ME_CONFIG_MONGODB_ADMINUSERNAME: root
+		  ME_CONFIG_MONGODB_ADMINPASSWORD: example
+		  ME_CONFIG_MONGODB_URL: mongodb://root:example@mongo:27017/
+</code>
+					</pre>
+				   </p>
+				   <h3  id="1-6">Hands on Mariadb and Adminer </h3>
+				   <h3  id="1-7">SQLite and https://sqlitebrowser.org </h3>
 			</article>
 			<!-- Add more post articles here -->
 		</section>

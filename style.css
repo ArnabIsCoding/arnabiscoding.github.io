@@ -44,7 +44,7 @@ footer {
 	bottom: 20px;
 	right: 20px;
   }
-a {
+p, a {
   color: #ffffff;
   text-decoration: none;
   margin: 0 10px 0 0;
