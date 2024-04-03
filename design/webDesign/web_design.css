@@ -12,11 +12,11 @@ body{
 ul {
 	list-style-type: none;
 	padding: 1vmin;
-	background-color: rgb(42, 62, 74);
+	/* background-color: rgb(42, 62, 74); */
 }
 ul li{
 	margin-bottom: 0.5rem;
-	background-color: rgb(8, 15, 19);
+	/* background-color: rgb(8, 15, 19); */
 }
 ul li:last-child{
 	margin-bottom: 0rem;
@@ -25,7 +25,7 @@ ul li:last-child{
 	padding: 1vmin;
 	/* border: 10px solid #b6b6ff; */
 	margin: 0vmin 0vmin 2vmin 0vmin;
-	background-color:rgba(24, 63, 49, 0.164);
+	/* background-color:rgba(24, 63, 49, 0.164); */
 }
 h1{
 	color: #F00;
@@ -39,7 +39,7 @@ h1{
 	padding: 0.5vmin;
 	/* border: 10px solid #8282fe; */
 	margin: 1.5vmin;
-	background-color: rgba(25, 74, 154, 0.332);
+	/* background-color: rgba(25, 74, 154, 0.332); */
 }
 h2{
 	color: #F00;
@@ -55,7 +55,7 @@ h2{
 	padding: 0.5vmin;
 	/* border: 10px solid #5353f5; */
 	margin: 2vmin;
-	background-color: rgba(8, 15, 19, 0.83);
+	/* background-color: rgba(8, 15, 19, 0.83); */
 }
 h3{
 	color: #F00;
@@ -70,7 +70,7 @@ h3{
 	padding: 0.25vmin;
 	/* border: 10px solid blue; */
 	margin: 1vmin;
-	background-color: rgba(8, 15, 19, 0.83);
+	/* background-color: rgba(8, 15, 19, 0.83); */
 }
 h4 {
 	color: #F00;
@@ -89,7 +89,7 @@ p{
 		line-height: normal;
 }
 .note{
-	color:rgb(255, 61, 61);
+	color:oklch(70% 0.266 284.82);
 }
 a{
 	color: #f6f674;

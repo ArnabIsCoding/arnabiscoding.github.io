@@ -32,3 +32,7 @@ div{
 	text-decoration: line-through;
 	text-decoration-color: #ff0000;
 }
+button.focus:focus{
+	outline: 2px solid #ff0000;
+	/* Red outline when focused */
+}

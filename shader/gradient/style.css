@@ -1,0 +1,29 @@
+body{
+	margin: 0;
+	overflow: hidden;
+}
+#gradient-canvas {
+	position: relative;
+	z-index: -100;
+  width:100vw;
+  height:100vh;
+  /* --gradient-color-1: #df5b43;
+  --gradient-color-2: #dbeb00;
+  --gradient-color-3: #3a9ca1;
+  --gradient-color-4: #b9beff; */
+  --gradient-color-1: #2d2c2c;
+  --gradient-color-2: #aeaeae;
+  --gradient-color-3: #2d2c2c;
+  --gradient-color-4: #aeaeae;
+}
+h1{
+	padding: 0;
+	margin: 0;
+	position: absolute;
+	z-index: 2;
+	top: 90%;
+	font-size:200%;
+	font-weight: bold;
+	font-family: 'Courier New', Courier, monospace;
+	text-decoration: none;
+}

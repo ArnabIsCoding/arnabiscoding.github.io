@@ -12,7 +12,8 @@ function draw(){
 	for(x = 0; x < width; x += 15){
     for(y = 0; y < height; y += 15){
 			let hue = myArray[floor(random(myArray.length))];
-      fill(hue);
+		fill(hue);
+		// noStroke();
       rect(x,y,15,15);
 }
 }
