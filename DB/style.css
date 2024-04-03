@@ -16,12 +16,14 @@
 	/* for Chrome, Safari, and Opera */
 }
 :root{
-	--primary-color: #303aea;
+	--primary-color: #548ce6;
 	--color-1: #e15524;
 	--color-2: #e96a3b;
 	--color-3: #f1825a;
 	--text: #202020;
 	--background:#f2f2f2;
+	--high: #87eb23;
+	--hov: #ff2655;
 }
 /* Reset and Base Styles */
 * {
@@ -58,7 +60,7 @@ nav {
 	height: 100%;
 	width: 0;
 	position: fixed;
-	z-index: 1;
+	z-index: 100;
 	top: 0;
 	left: 0;
 	background-color: #333;
@@ -152,12 +154,13 @@ main {
 .posts article {
 	margin-bottom: 2rem;
 	/* border: 1px solid #ccc; */
-	padding: 1rem;
+	/* padding: 1rem; */
 }
 
 .posts article img {
 	max-width: 100%;
 	height: auto;
+	padding: 1rem;
 }
 
 .posts article h2 {
@@ -194,7 +197,7 @@ h3{
 	background-color: #555;
 } */
 ::selection{
-	background-color: #87eb23;
+	background-color: var(--high);
 }
 /* Footer Styles */
 footer {
@@ -209,13 +212,21 @@ a:hover {
 	font-size:x-large;
 	color: var(--color-1);
 }
+main a{
+	color: var(--primary-color);
+}
 main a:hover{
 	font-size:initial;
+	color: var(--hov);
+	text-decoration:underline;
 }
-
+/* link underline attempt */
 a.viewrn {
 	text-decoration: underline;
-  } 
+  }
+a:visited{
+	color: gray;
+}
 /* Responsive Styles */
 @media (max-width: 768px) {
 	.menu {

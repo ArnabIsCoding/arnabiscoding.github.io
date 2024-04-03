@@ -28,6 +28,7 @@ function closeNav() {
   document.getElementById("main").style.marginLeft= "0";
 }
 
+//link underline attempt
 const headingElements = document.querySelectorAll('h1[id], h2[id], h3[id]');
   const links = document.querySelectorAll('a[href^="#"]');
 
