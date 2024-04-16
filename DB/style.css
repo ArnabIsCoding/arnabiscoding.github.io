@@ -232,6 +232,17 @@ a:visited{
 }
 /* Responsive Styles */
 @media (max-width: 768px) {
+	.openbtn{
+		position: fixed;
+		/* top: 5em; */
+		left: 0em;
+		height: 2.5%;
+		cursor: pointer;
+		background-color: #f2f2f2;
+		color: rgb(0, 0, 0);
+		/* padding: 10px 15px; */
+		border: none;
+	}
 	.menu {
 		display: none;
 		flex-direction: column;
