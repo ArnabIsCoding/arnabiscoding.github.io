@@ -12,12 +12,18 @@ window.addEventListener('click', (e) => {
     menu.classList.remove('show');
   }
 });
+function getScrollPosition() {
+  return window.scrollY || document.documentElement.scrollTop;
+}
+
 window.addEventListener('scroll', function() {
   const pageCounter = document.querySelector('.page-counter');
-  const scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
+  const scrollPosition = getScrollPosition();
   const pageNumber = Math.round(scrollPosition / 1000) + 1;
   pageCounter.textContent = pageNumber;
+  console.log(pageNumber);
 });
+
 function openNav() {
   document.getElementById("mySidebar").style.width = "250px";
   document.getElementById("main").style.marginLeft = "250px";
