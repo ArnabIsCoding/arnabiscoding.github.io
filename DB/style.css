@@ -239,8 +239,9 @@ a:visited{
 		height: 2.5%;
 		cursor: pointer;
 		/* background-color: #f2f2f2; */
+		background-color: rgba(0, 0, 0, 0);
 		color: rgb(0, 0, 0);
-		/* padding: 10px 15px; */
+		padding: 0px 10px;
 		border: none;
 	}
 	.menu {
