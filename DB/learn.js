@@ -1,17 +1,3 @@
-// Toggle mobile menu
-const menuToggle = document.querySelector('.menu-toggle');
-const menu = document.querySelector('.menu');
-
-menuToggle.addEventListener('click', () => {
-  menu.classList.toggle('show');
-});
-
-// Close mobile menu when clicking outside
-window.addEventListener('click', (e) => {
-  if (!e.target.closest('.menu-toggle') && !e.target.closest('.menu')) {
-    menu.classList.remove('show');
-  }
-});
 function getScrollPosition() {
   return window.scrollY || document.documentElement.scrollTop;
 }
@@ -26,12 +12,10 @@ window.addEventListener('scroll', function() {
 
 function openNav() {
   document.getElementById("mySidebar").style.width = "250px";
-  document.getElementById("main").style.marginLeft = "250px";
 }
 
 function closeNav() {
   document.getElementById("mySidebar").style.width = "0";
-  document.getElementById("main").style.marginLeft= "0";
 }
 
 const headingElements = document.querySelectorAll('h1[id], h2[id], h3[id]');
