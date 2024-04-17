@@ -9,11 +9,6 @@
 	<meta name="description" content="Explore database management systems with a focus on AuthZ vs AuthN, SQL vs NoSQL, understanding NoSQL records, JSON vs BSON, and hands-on experience with MongoDB, MariaDB, SQLite, and more. Delve into topics like indexing, transactions, data partitioning, CAP theorem, NoSQL trade-offs, scalability challenges, enterprise solutions, and database internals.">
 	<meta name="keywords" content="database management systems, AuthZ, AuthN, SQL, NoSQL, MongoDB, MariaDB, SQLite, BSON, JSON, indexing, transactions, isolation levels, table locks, file descriptors, CAP theorem, consistent hashing, quorums, schema, scalability, high availability, replication, sharding, key-value, document, column, graph databases, Redis, Cassandra, Aerospike, Elasticsearch, data modeling, partitioning, sharding, storage engines, caching, distributed systems, cache databases, Redis implementation.">
 	<link rel="stylesheet" href="style.css">
-	<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-	<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-	<!-- <script src="learn.js" defer></script> -->
-	<script src="../asciinema-player.min.js"></script>
-	<link rel="stylesheet" href="../asciinema-player.css">
 </head>
 
 <body>
@@ -134,14 +129,14 @@
 				   <p>Now to get this running follow the commands below,</p>
 				   <div class="asciinema" id="mongoComposeplayer"></div>
 				   <p>Opening the docker engine interface we see,</p>
-				   <img src="./assets/pic/Screenshot 2024-03-25 232336.webp" alt="" srcset="">
+				   <img class="lazy" data-src="./assets/pic/Screenshot 2024-03-25 232336.webp" alt="" srcset="">
 				   <p>As it stands now we have,</p>
 				   <code>mongo database server running at http://localhost:27017/</code><br>
 				   <code>mongo express running at http://localhost:8082/</code>
 				   <p>As Mongo express is the interface we will visit that link,</p>
-				   <img src="./assets/pic/Screenshot 2024-03-25 232223.webp" alt="" srcset="">
+				   <img class="lazy" data-src="./assets/pic/Screenshot 2024-03-25 232223.webp" alt="" srcset="">
 				   <p>It prompts you to input the username and password which is "arnab" and "A12345" in my case according to my configuration.</p>
-				   <img src="./assets/pic/Screenshot 2024-03-25 232417.webp" alt="" srcset="">
+				   <img class="lazy" data-src="./assets/pic/Screenshot 2024-03-25 232417.webp" alt="" srcset="">
 				   <h3  id="1-4">JSON vs BSON</h3>
 				   <p>If you wish to nerd out you should read the <a href="https://www.mongodb.com/basics/bson">MongoDB docs on BSON</a>.</p>
 				   <p>TL;DR: JSON (JavaScript Object Notation) and BSON (Binary JSON) are both data interchange formats used primarily in web development and data storage. JSON is human-readable and lightweight, making it easy to parse and generate. However, BSON is a binary-encoded serialization of JSON-like documents, offering advantages like efficiency in storage and transmission, support for additional data types, and faster parsing. BSON is commonly used in databases like MongoDB for efficient storage and retrieval of data, especially in large-scale applications where performance is crucial.</p>
@@ -167,11 +162,11 @@
 				   </pre> -->
 				   <script src="https://gist.github.com/ArnabIsCoding/eabdfdbf72fe22660dc167b6ba7b4c3b.js"></script>
 				   <p>Let's make a new database on our server</p>
-				   <img src="./assets/pic/Screenshot 2024-03-27 150020.webp" alt="" srcset="">
-				   <img src="./assets/pic/Screenshot 2024-03-27 150111.webp" alt="" srcset="">
+				   <img class="lazy" data-src="./assets/pic/Screenshot 2024-03-27 150020.webp" alt="" srcset="">
+				   <img class="lazy" data-src="./assets/pic/Screenshot 2024-03-27 150111.webp" alt="" srcset="">
 				   <p>Click on view to open the db and create a new file</p>
-				   <img src="./assets/pic/Screenshot 2024-03-27 150201.webp" alt="" srcset="">
-				   <img src="./assets/pic/Screenshot 2024-03-27 150227.webp" alt="" srcset="">
+				   <img class="lazy" data-src="./assets/pic/Screenshot 2024-03-27 150201.webp" alt="" srcset="">
+				   <img class="lazy" data-src="./assets/pic/Screenshot 2024-03-27 150227.webp" alt="" srcset="">
 				   <p>Formating the JSON for the input it would look like this,</p>
 				   <!-- <pre>
 <code>
@@ -195,7 +190,7 @@
 				   </pre> -->
 				   <script src="https://gist.github.com/ArnabIsCoding/b6e174a27d97621d090e52e917fa358c.js"></script>
 				   <p>after we paste the code and save it shows up on the gui. You can see the data got populated by itself and no schema was required (as mongoDB is NoSQL). This data stored here is in BSON format.</p>
-				   <img src="./assets/pic/Screenshot 2024-03-27 150538.webp" alt="" srcset="">
+				   <img class="lazy" data-src="./assets/pic/Screenshot 2024-03-27 150538.webp" alt="" srcset="">
 				   <h3  id="1-3">Understanding Nosql records/documents </h3>
 				   <p>from there if we were to change some data say my last name. I can click on the field and we can edit from there.</p>
 				   <p>As we can see unlike SQL we don't have any restrictions with the schema like how many characters a specific field can be.</p>
@@ -211,6 +206,9 @@
 		<a href="http://twitter.com/arnabiscoding">Twitter</a>
 	</footer>
 </body>
+<script src="./learn.js"></script>
+<script src="../asciinema-player.min.js"></script>
+<link rel="stylesheet" href="../asciinema-player.css">
 <script>
 	//mongocompose
 AsciinemaPlayer.create(
@@ -219,5 +217,6 @@ AsciinemaPlayer.create(
   { cols: 148, rows: 21 }
 );
 </script>
-<script src="./learn.js"></script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </html>
