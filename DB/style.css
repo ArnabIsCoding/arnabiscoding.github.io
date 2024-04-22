@@ -1,6 +1,6 @@
 @font-face {
-	/* font-family: openDR; */
-	/* src: url('../font/OpenDyslexic-Regular.woff2') format('woff2'); */
+	font-family: openDR;
+	src: url('../font/OpenDyslexic-Regular.woff2') format('woff2');
 }
 /* hide scrollbar but allow scrolling */
 .sidebar {
@@ -39,7 +39,7 @@ body {
 }
 a {
 	text-decoration: none;
-	margin: 0 10px 0 0;
+	/* margin: 0 10px 0 0; */
 	transition: all 0.5s;
 }
 
