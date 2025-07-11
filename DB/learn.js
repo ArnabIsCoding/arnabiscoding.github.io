@@ -18,6 +18,7 @@ function closeNav() {
   document.getElementById("mySidebar").style.width = "0";
 }
 
+//link underline attempt
 const headingElements = document.querySelectorAll('h1[id], h2[id], h3[id]');
   const links = document.querySelectorAll('a[href^="#"]');
 
@@ -40,29 +41,3 @@ const headingElements = document.querySelectorAll('h1[id], h2[id], h3[id]');
   headingElements.forEach((headingElement) => {
     observer.observe(headingElement);
   });
-
-// Get all images with the class "lazy"
-const lazyImages = document.querySelectorAll('img.lazy');
-
-// Function to lazy load images
-function lazyLoad() {
-  lazyImages.forEach(img => {
-    // Check if the image is in the viewport
-    if (img.getBoundingClientRect().top < window.innerHeight && img.getBoundingClientRect().bottom >= 0) {
-      // Load the image
-      img.src = img.dataset.src;
-      // Remove the "lazy" class so it doesn't get processed again
-      img.classList.remove('lazy');
-      // Unbind the event listener after loading the image
-      img.removeEventListener('load', lazyLoad);
-    }
-  });
-}
-
-// Add the event listeners
-window.addEventListener('scroll', lazyLoad);
-window.addEventListener('resize', lazyLoad);
-window.addEventListener('orientationChange', lazyLoad);
-
-// Call the lazyLoad function initially
-lazyLoad();

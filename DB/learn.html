@@ -9,11 +9,20 @@
 	<meta name="description" content="Explore database management systems with a focus on AuthZ vs AuthN, SQL vs NoSQL, understanding NoSQL records, JSON vs BSON, and hands-on experience with MongoDB, MariaDB, SQLite, and more. Delve into topics like indexing, transactions, data partitioning, CAP theorem, NoSQL trade-offs, scalability challenges, enterprise solutions, and database internals.">
 	<meta name="keywords" content="database management systems, AuthZ, AuthN, SQL, NoSQL, MongoDB, MariaDB, SQLite, BSON, JSON, indexing, transactions, isolation levels, table locks, file descriptors, CAP theorem, consistent hashing, quorums, schema, scalability, high availability, replication, sharding, key-value, document, column, graph databases, Redis, Cassandra, Aerospike, Elasticsearch, data modeling, partitioning, sharding, storage engines, caching, distributed systems, cache databases, Redis implementation.">
 	<link rel="stylesheet" href="style.css">
+	<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+	<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+	<!-- <script src="learn.js" defer></script> -->
+	<script src="./learn.js"></script>
+	<script src="../asciinema-player.min.js"></script>
+	<link rel="stylesheet" href="../asciinema-player.css">
 </head>
 
 <body>
 	<header>
 		<nav>
+			<div class="page-counter">
+				1
+			</div>
 				<div id="mySidebar" class="sidebar">
 					<button href="javascript:void(0)" class="closebtn" onclick="closeNav()">◀</button>
 					<h1>INDEX</h1>
@@ -51,7 +60,7 @@
 			</article> -->
 			<article>
 				<h2>Introduction</h2>
-				<p>You can open the sidebar for index. I am learning myself so it will take a while to complete. The font used is called <a href="https://opendyslexic.org/" class="noo">opendyslexic</a>. The code snippets are shared using <a href="https://asciinema.org/" class="noo">asciinema</a> you can pause and copy the code from there. This are my notes and some more from classes taught by <a href="https://twitter.com/LVNilesh">@LVNilesh</a>, link to <a href="https://github.com/shivanand-patil/TheDataSeminar/"> github repo</a> for all things related. If you find any misinformation on this website please let me know.</p>
+				<p>You can open the sidebar for index. I am learning myself so it will take a while to complete. The font used is called <a href="https://opendyslexic.org/" class="noo">opendyslexic</a>. The code snippets are shared using <a href="https://asciinema.org/" class="noo">asciinema</a> you can pause and copy the code from there. If you find any misinformation on this website please let me know.</p>
 			</article>
 			<article>
 				<h2 id="1-0">Basic</h2>
@@ -69,19 +78,19 @@
 				   <h3  id="1-5">Hands on MongoDB and Mongo-Express </h3>
 				   <p>
 					official <a target="_blank" href="https://hub.docker.com/_/mongo">docker-compose image for MongoDB</a>,
-					<!-- <pre>
+					<pre>
 <code># Use root/example as user/password credentials
 	version: '3.1'
-	
+
 	services:
-	
+
 	  mongo:
 		image: mongo
 		restart: always
 		environment:
 		  MONGO_INITDB_ROOT_USERNAME: root
 		  MONGO_INITDB_ROOT_PASSWORD: example
-	
+
 	  mongo-express:
 		image: mongo-express
 		restart: always
@@ -92,10 +101,9 @@
 		  ME_CONFIG_MONGODB_ADMINPASSWORD: example
 		  ME_CONFIG_MONGODB_URL: mongodb://root:example@mongo:27017/
 </code>
-					</pre> -->
-					<script src="https://gist.github.com/ArnabIsCoding/95539c8d54c49d1dfdeb54edba514ac4.js"></script>
+					</pre>
 					Our edited verison,
-					<!-- <pre>
+					<pre>
 <code>
 	version: "3.1"
 
@@ -108,7 +116,7 @@
 		environment:
 		  MONGO_INITDB_ROOT_USERNAME: arnab
 		  MONGO_INITDB_ROOT_PASSWORD: A12345
-	
+
 	  mongo-express:
 		image: mongo-express
 		restart: always
@@ -122,31 +130,30 @@
 		  ME_CONFIG_BASICAUTH_USERNAME: "arnab"
 		  ME_CONFIG_BASICAUTH_PASSWORD: "A12345"
 </code>
-					</pre> -->
-					<script src="https://gist.github.com/ArnabIsCoding/65a328093a3ab4068ed67178a5cdfa9c.js"></script>
-					<p>we are changing the port, adding our username, password. We are also adding a custom theme to Mongo-Express which is a web-based MongoDB admin interface written in Node. js, Express. js, and Bootstrap3.
+					</pre>
+					we are changing the port, adding our username, password. We are also adding a custom theme to Mongo-Express which is a web-based MongoDB admin interface written in Node. js, Express. js, and Bootstrap3.
 				   </p>
 				   <p>Now to get this running follow the commands below,</p>
 				   <div class="asciinema" id="mongoComposeplayer"></div>
 				   <p>Opening the docker engine interface we see,</p>
-				   <img class="lazy" data-src="./assets/pic/Screenshot 2024-03-25 232336.webp" alt="" srcset="">
+				   <img src="./assets/pic/Screenshot 2024-03-25 232336.webp" alt="" srcset="">
 				   <p>As it stands now we have,</p>
-				   <code>mongo database server running at http://localhost:27017/</code><br>
+				   <code>mongo database server is running at http://localhost:27017/</code><br>
 				   <code>mongo express running at http://localhost:8082/</code>
 				   <p>As Mongo express is the interface we will visit that link,</p>
-				   <img class="lazy" data-src="./assets/pic/Screenshot 2024-03-25 232223.webp" alt="" srcset="">
+				   <img src="./assets/pic/Screenshot 2024-03-25 232223.webp" alt="" srcset="">
 				   <p>It prompts you to input the username and password which is "arnab" and "A12345" in my case according to my configuration.</p>
-				   <img class="lazy" data-src="./assets/pic/Screenshot 2024-03-25 232417.webp" alt="" srcset="">
+				   <img src="./assets/pic/Screenshot 2024-03-25 232417.webp" alt="" srcset="">
 				   <h3  id="1-4">JSON vs BSON</h3>
 				   <p>If you wish to nerd out you should read the <a href="https://www.mongodb.com/basics/bson">MongoDB docs on BSON</a>.</p>
 				   <p>TL;DR: JSON (JavaScript Object Notation) and BSON (Binary JSON) are both data interchange formats used primarily in web development and data storage. JSON is human-readable and lightweight, making it easy to parse and generate. However, BSON is a binary-encoded serialization of JSON-like documents, offering advantages like efficiency in storage and transmission, support for additional data types, and faster parsing. BSON is commonly used in databases like MongoDB for efficient storage and retrieval of data, especially in large-scale applications where performance is crucial.</p>
 				   <p>Say we have a json file called arnab.json,</p>
-				   <!-- <pre>
+				   <pre>
 <code>
 	{
 	  "firstName": "Arnab",
 	  "lastName": "Goswami",
-	
+
 	  "Address": {
 		"City": "Malda",
 		"ZipPIN": "73210",
@@ -157,24 +164,23 @@
 		"P2": "Expect to lose and fear failure, desire to win and prepare for war."
 	  }
 	}
-	
+
 </code>
-				   </pre> -->
-				   <script src="https://gist.github.com/ArnabIsCoding/eabdfdbf72fe22660dc167b6ba7b4c3b.js"></script>
+				   </pre>
 				   <p>Let's make a new database on our server</p>
-				   <img class="lazy" data-src="./assets/pic/Screenshot 2024-03-27 150020.webp" alt="" srcset="">
-				   <img class="lazy" data-src="./assets/pic/Screenshot 2024-03-27 150111.webp" alt="" srcset="">
+				   <img src="./assets/pic/Screenshot 2024-03-27 150020.webp" alt="" srcset="">
+				   <img src="./assets/pic/Screenshot 2024-03-27 150111.webp" alt="" srcset="">
 				   <p>Click on view to open the db and create a new file</p>
-				   <img class="lazy" data-src="./assets/pic/Screenshot 2024-03-27 150201.webp" alt="" srcset="">
-				   <img class="lazy" data-src="./assets/pic/Screenshot 2024-03-27 150227.webp" alt="" srcset="">
+				   <img src="./assets/pic/Screenshot 2024-03-27 150201.webp" alt="" srcset="">
+				   <img src="./assets/pic/Screenshot 2024-03-27 150227.webp" alt="" srcset="">
 				   <p>Formating the JSON for the input it would look like this,</p>
-				   <!-- <pre>
+				   <pre>
 <code>
 	{
 		"_id": ObjectId(),
 	  "firstName": "Arnab",
 	  "lastName": "Goswami",
-	
+
 	  "Address": {
 		"City": "Malda",
 		"ZipPIN": "73210",
@@ -185,12 +191,11 @@
 		"P2": "Expect to lose and fear failure, desire to win and prepare for war."
 	  }
 	}
-	
+
 </code>
-				   </pre> -->
-				   <script src="https://gist.github.com/ArnabIsCoding/b6e174a27d97621d090e52e917fa358c.js"></script>
+				   </pre>
 				   <p>after we paste the code and save it shows up on the gui. You can see the data got populated by itself and no schema was required (as mongoDB is NoSQL). This data stored here is in BSON format.</p>
-				   <img class="lazy" data-src="./assets/pic/Screenshot 2024-03-27 150538.webp" alt="" srcset="">
+				   <img src="./assets/pic/Screenshot 2024-03-27 150538.webp" alt="" srcset="">
 				   <h3  id="1-3">Understanding Nosql records/documents </h3>
 				   <p>from there if we were to change some data say my last name. I can click on the field and we can edit from there.</p>
 				   <p>As we can see unlike SQL we don't have any restrictions with the schema like how many characters a specific field can be.</p>
@@ -206,9 +211,6 @@
 		<a href="http://twitter.com/arnabiscoding">Twitter</a>
 	</footer>
 </body>
-<script src="./learn.js"></script>
-<script src="../asciinema-player.min.js"></script>
-<link rel="stylesheet" href="../asciinema-player.css">
 <script>
 	//mongocompose
 AsciinemaPlayer.create(
@@ -217,6 +219,4 @@ AsciinemaPlayer.create(
   { cols: 148, rows: 21 }
 );
 </script>
-<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </html>
