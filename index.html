@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="icon" type="image/x-icon" href="/image/favicon.ico">
+	<title>ARNAB IS CODING</title>
+	<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:wght@400;700&display=swap"
+		rel="stylesheet">
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box
+		}
+
+		:root {
+			--red: #e03020;
+			--cream: #f0ece3
+		}
+
+		html,
+		body {
+			width: 100%;
+			height: 100%;
+			overflow: hidden;
+			background: #0a0a0a
+		}
+
+		body {
+			cursor: none
+		}
+
+		#app {
+			position: relative;
+			width: 100dvw;
+			height: 100dvh
+		}
+
+		#bg-canvas {
+			position: absolute;
+			inset: 0;
+			width: 100%;
+			height: 100%;
+			display: block;
+			z-index: 0
+		}
+
+		#three-canvas {
+			position: absolute;
+			inset: 0;
+			width: 100%;
+			height: 100%;
+			display: block;
+			z-index: 1;
+			pointer-events: none
+		}
+
+		#crt-canvas {
+			position: absolute;
+			inset: 0;
+			width: 100%;
+			height: 100%;
+			display: block;
+			z-index: 2;
+			pointer-events: none
+		}
+
+		#overlay {
+			position: absolute;
+			inset: 0;
+			pointer-events: none;
+			font-family: 'Bebas Neue', sans-serif;
+			z-index: 3
+		}
+
+		.label {
+			position: absolute;
+			color: var(--cream);
+			text-shadow: 1px 1px 0 #000, -1px -1px 0 #000;
+			animation: fA 1s ease both
+		}
+
+		a.label {
+			text-decoration: none;
+			pointer-events: all;
+			transition: color .2s
+		}
+
+		a.label:hover {
+			color: var(--red)
+		}
+
+		.t1 {
+			top: 4vh;
+			left: 4vw;
+			font-size: clamp(1rem, 3.5vw, 2.8rem);
+			letter-spacing: .04em;
+			animation-delay: .4s
+		}
+
+		.t2 {
+			top: 4vh;
+			right: 4vw;
+			font-size: clamp(1.2rem, 4.5vw, 3.8rem);
+			letter-spacing: .06em;
+			text-align: right;
+			animation-delay: .5s
+		}
+
+		.sl {
+			left: 3vw;
+			top: 50%;
+			transform: translateY(-50%) rotate(-90deg);
+			font-size: clamp(.65rem, 1.6vw, 1.3rem);
+			letter-spacing: .16em;
+			white-space: nowrap;
+			font-family: 'Space Mono', monospace;
+			animation-delay: .8s
+		}
+
+		.sr {
+			right: 3vw;
+			top: 50%;
+			transform: translateY(-50%) rotate(90deg);
+			font-size: clamp(.65rem, 1.6vw, 1.3rem);
+			letter-spacing: .16em;
+			white-space: nowrap;
+			font-family: 'Space Mono', monospace;
+			animation-delay: .9s
+		}
+
+		.b1 {
+			position: absolute;
+			bottom: 3vh;
+			left: 0;
+			right: 0;
+			display: flex;
+			justify-content: center;
+			pointer-events: none;
+			z-index: 4
+		}
+
+		.b2 {
+			font-family: 'Bebas Neue', sans-serif;
+			font-size: clamp(1rem, 3vw, 2.4rem);
+			letter-spacing: .1em;
+			display: flex;
+			align-items: center;
+			gap: clamp(.6rem, 2.5vw, 2rem);
+			white-space: nowrap;
+			pointer-events: all;
+			opacity: 0;
+			animation: bA 1s .7s ease forwards
+		}
+
+		.b2 a {
+			color: var(--cream);
+			text-decoration: none;
+			text-shadow: 1px 1px 0 #000, -1px -1px 0 #000;
+			border-bottom: 2px solid transparent;
+			padding-bottom: 2px;
+			transition: color .2s, border-color .2s
+		}
+
+		.b2 a:hover {
+			color: var(--red);
+			border-color: var(--red)
+		}
+
+		.b2 .s1 {
+			color: var(--cream);
+			opacity: .4;
+			text-shadow: 1px 1px 0 #000
+		}
+
+		@keyframes fA {
+			from {
+				opacity: 0;
+				transform: translateY(8px)
+			}
+
+			to {
+				opacity: 1;
+				transform: translateY(0)
+			}
+		}
+
+		@keyframes bA {
+			from {
+				opacity: 0
+			}
+
+			to {
+				opacity: 1
+			}
+		}
+
+		#c1 {
+			position: fixed;
+			width: 10px;
+			height: 10px;
+			background: var(--red);
+			border-radius: 50%;
+			pointer-events: none;
+			z-index: 9999;
+			mix-blend-mode: difference;
+			transform: translate(-50%, -50%);
+			transition: width .2s, height .2s
+		}
+
+		#c1.big {
+			width: 40px;
+			height: 40px
+		}
+
+		#t3 {
+			position: fixed;
+			pointer-events: none;
+			z-index: 10000;
+			background: rgba(10, 10, 10, .92);
+			border: 1px solid var(--red);
+			color: var(--cream);
+			font-family: 'Space Mono', monospace;
+			font-size: .7rem;
+			letter-spacing: .04em;
+			padding: .35em .6em;
+			max-width: 220px;
+			white-space: normal;
+			line-height: 1.4;
+			opacity: 0;
+			transition: opacity .15s;
+			transform: translate(18px, -50%)
+		}
+
+		#t3.visible {
+			opacity: 1
+		}
+
+		.m1 {
+			display: none;
+			position: fixed;
+			inset: 0;
+			background: rgba(0, 0, 0, .78);
+			z-index: 5000;
+			align-items: center;
+			justify-content: center;
+			backdrop-filter: blur(4px)
+		}
+
+		.m1.open {
+			display: flex
+		}
+
+		.m2 {
+			position: relative;
+			background: #0f0f0f;
+			border: 1px solid #2a2a2a;
+			border-top: 2px solid var(--red);
+			color: var(--cream);
+			font-family: 'Space Mono', monospace;
+			width: min(520px, 92vw);
+			max-height: 82vh;
+			overflow-y: auto;
+			padding: 2rem 2rem 1.8rem;
+			animation: mA .22s ease both;
+			scrollbar-width: thin;
+			scrollbar-color: var(--red) #1a1a1a
+		}
+
+		.m2::-webkit-scrollbar {
+			width: 5px
+		}
+
+		.m2::-webkit-scrollbar-track {
+			background: #1a1a1a
+		}
+
+		.m2::-webkit-scrollbar-thumb {
+			background: var(--red)
+		}
+
+		@keyframes mA {
+			from {
+				opacity: 0;
+				transform: translateY(14px) scale(.97)
+			}
+
+			to {
+				opacity: 1;
+				transform: translateY(0) scale(1)
+			}
+		}
+
+		.m3 {
+			position: absolute;
+			top: .9rem;
+			right: 1rem;
+			background: none;
+			border: none;
+			color: var(--cream);
+			font-size: 1.3rem;
+			cursor: none;
+			opacity: .6;
+			transition: opacity .15s, color .15s
+		}
+
+		.m3:hover {
+			opacity: 1;
+			color: var(--red)
+		}
+
+		.m2 h2 {
+			font-family: 'Bebas Neue', sans-serif;
+			font-size: 1.8rem;
+			letter-spacing: .08em;
+			color: var(--red);
+			margin-bottom: 1.4rem
+		}
+
+		.m2 h3 {
+			font-family: 'Bebas Neue', sans-serif;
+			font-size: 1.1rem;
+			letter-spacing: .1em;
+			color: var(--cream);
+			border-bottom: 1px solid #222;
+			padding-bottom: .3rem;
+			margin: 1.4rem 0 .7rem
+		}
+
+		.m2 h3:first-of-type {
+			margin-top: 0
+		}
+
+		.p1 {
+			display: flex;
+			flex-direction: column;
+			gap: .15rem;
+			padding: .5rem 0;
+			border-bottom: 1px solid #181818
+		}
+
+		.p1:last-child {
+			border-bottom: none
+		}
+
+		.p2 {
+			color: var(--cream);
+			text-decoration: none;
+			font-size: .78rem;
+			letter-spacing: .04em;
+			transition: color .15s
+		}
+
+		.p2:hover {
+			color: var(--red)
+		}
+
+		.p3 {
+			font-size: .65rem;
+			color: #888;
+			letter-spacing: .02em;
+			line-height: 1.5
+		}
+
+		.c2 {
+			margin-bottom: .8rem
+		}
+
+		.c3 {
+			color: var(--red);
+			font-size: .78rem;
+			letter-spacing: .05em;
+			margin-bottom: .35rem;
+			text-decoration: none;
+			display: inline-block;
+			border-bottom: 1px solid var(--red);
+			transition: opacity .15s
+		}
+
+		.c3:hover {
+			opacity: .75
+		}
+
+		.c2 ul {
+			list-style: none;
+			padding-left: .8rem
+		}
+
+		.c2 ul li {
+			padding: .28rem 0;
+			border-bottom: 1px solid #181818;
+			font-size: .72rem
+		}
+
+		.c2 ul li:last-child {
+			border-bottom: none
+		}
+
+		.c2 ul li a {
+			color: var(--cream);
+			text-decoration: none;
+			transition: color .15s
+		}
+
+		.c2 ul li a:hover {
+			color: var(--red)
+		}
+
+		.c4 {
+			display: flex;
+			flex-direction: column;
+			gap: .6rem;
+			margin-top: .4rem
+		}
+
+		.c5 {
+			display: flex;
+			align-items: center;
+			gap: 1rem;
+			padding: .55rem .8rem;
+			border: 1px solid #1e1e1e;
+			transition: border-color .15s
+		}
+
+		.c5:hover {
+			border-color: var(--red)
+		}
+
+		.c5 a {
+			color: var(--cream);
+			text-decoration: none;
+			font-size: .78rem;
+			letter-spacing: .06em;
+			transition: color .15s
+		}
+
+		.c5 a:hover {
+			color: var(--red)
+		}
+
+		.c6 {
+			width: 18px;
+			flex-shrink: 0;
+			opacity: .7
+		}
+
+		.dZ0 {
+			display: none !important;
+			position: absolute;
+			z-index: -999
+		}
+	</style>
+</head>
+
+<body>
+	<div id="app"><canvas id="bg-canvas"></canvas><canvas id="three-canvas"></canvas><canvas id="crt-canvas"></canvas>
+		<div id="overlay">
+			<div class="label t1">ARNAB<br>IS CODING</div>
+			<div class="label t2">SOFTWARE<br>ENGINEER</div><a href="./game/depointer.html" target="_blank"
+				class="label sl">Play Debug Pointers!</a><a href="./game/debegg.html" class="label sr">Play Debug Egg</a>
+		</div>
+		<div class="b1">
+			<div class="b2"><a href="#" id="nav-cv" data-tip="Download my résumé as PDF">CV</a><span class="s1">·</span><a
+					href="#" id="nav-projects" data-tip="Browse my work">PROJECTS</a><span class="s1">·</span><a href="#"
+					id="nav-contact" data-tip="Get in touch">CONTACT</a></div>
+		</div>
+	</div>
+	<div id="c1"></div>
+	<div id="t3"></div>
+	<div class="m1" id="modal-projects">
+		<div class="m2" role="dialog" aria-modal="true" aria-labelledby="proj-title"><button class="m3"
+				aria-label="Close">✕</button>
+			<h2 id="proj-title">PROJECTS</h2>
+			<h3>ORIGINAL WORKS</h3>
+			<div id="proj-original"></div>
+			<h3>COURSE WORK</h3>
+			<div id="proj-courses"></div>
+			<h3>RANDOM</h3>
+			<div id="proj-random"></div>
+		</div>
+	</div>
+	<div class="m1" id="modal-contact">
+		<div class="m2" role="dialog" aria-modal="true" aria-labelledby="contact-title"><button class="m3"
+				aria-label="Close">✕</button>
+			<h2 id="contact-title">CONTACT</h2>
+			<div id="contact-links"></div>
+		</div>
+	</div>
+	<div class="dZ0" id="dz-dead">DEADCODE</div>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+	<script>'use strict';
+		/* ═══════════════════════════════════════════════════════════════════
+			 ████████  SITE DATA  — edit everything here
+		═══════════════════════════════════════════════════════════════════ */
+
+		/** Path or URL to your CV file. Hosted on GitHub Pages: */
+		const CV_URL = 'https://arnabiscoding.github.io/ArnabGoswami_Resume.pdf';
+		// ↑ Change the filename to match whatever you upload to your repo root.
+
+		/** Original / solo projects */
+		const ORIGINAL_WORKS = [
+			{
+				title: 'Youtube Bulk Playlist Eraser',
+				url: 'https://github.com/ArnabIsCoding/Youtube-Bulk-Playlist-Eraser',
+				desc: 'Bulk delete YouTube playlists — runs in background even when popup is closed.'
+			},
+			{
+				title: 'Compare From Paths',
+				url: 'https://github.com/ArnabIsCoding/cfp',
+				desc: 'open files in compare mode from file paths.- vs code extension'
+			},
+			{
+				title: 'hl Hierarchy Link Obsidian Plugin',
+				url: 'https://github.com/ArnabIsCoding/Hierarchy-Link',
+				desc: 'simple plugin for Obsidian that takes a selected indented markdown list and creates a new file for each item, automatically adding a backlink to its parent item.'
+			},
+			// ── Add more entries here ──
+			// { title: 'Project Name', url: 'https://...', desc: 'Short description.' },
+		];
+
+		/**
+		 * Coursework grouped by course / specialisation.
+		 * `url`  → official Coursera (or other) page for the course.
+		 * `projects` → list of individual project entries.
+		 */
+		const COURSE_GROUPS = [
+			{
+				name: 'Cloud Specialization',
+				url: 'https://www.coursera.org/specializations/cloud-computing',
+				projects: [
+					{ title: 'Basic Cloud Setup', url: 'https://arnabiscoding.github.io/cloud/basic_cloud/', desc: 'Provisioning and networking basics on the cloud.' },
+					// { title: 'Project 2', url: 'https://...', desc: '...' },
+				]
+			},
+			{
+				name: 'Generative AI',
+				url: 'https://www.coursera.org/learn/generative-ai-for-everyone',
+				projects: [
+					{ title: 'Generative AI Experiments', url: 'https://arnabiscoding.github.io/Generative%20AI/', desc: 'Prompting and fine-tuning experiments from the course.' },
+				]
+			},
+			// ── Add more course groups here ──
+			// {
+			//   name: 'Another Course',
+			//   url: 'https://coursera.org/...',
+			//   projects: [
+			//     { title: 'Project 1', url: '...', desc: '...' },
+			//   ]
+			// },
+		];
+
+		/** Random — blog posts, articles, misc links */
+		const RANDOM = [
+			// { title: 'My First Blog Post', url: 'https://...', desc: 'Thoughts on something interesting.' },
+			// ── Add entries here ──
+		];
+
+		/** Contact links — icon is an inline SVG path (viewBox 0 0 24 24) */
+		const CONTACT_LINKS = [
+			{
+				label: 'GitHub',
+				url: 'https://github.com/ArnabIsCoding',
+				// simple GitHub mark path
+				icon: 'M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.942.359.31.678.921.678 1.856 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2z'
+			},
+			{
+				label: 'LinkedIn',
+				url: 'https://www.linkedin.com/in/arnabiscoding/',
+				icon: 'M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z'
+			},
+			{
+				label: 'X / Twitter',
+				url: 'https://x.com/Arnabiscoding',
+				icon: 'M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.26 5.632 5.904-5.632zm-1.161 17.52h1.833L7.084 4.126H5.117z'
+			},
+			// {
+			// 	label: 'Facebook',
+			// 	url: 'https://www.facebook.com/Arnabiscoding',
+			// 	icon: 'M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z'
+			// },
+			{
+				label: 'Email',
+				url: 'mailto:arnabiscoding@gmail.com',
+				icon: 'M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z'
+			},
+		]; const _T = { bg: { base: '#4455cc', dots: '#cc2200' }, skeleton: { coreDark: [.01, .01, .01], coreMid: [.04, .04, .04], rimA: [.25, .25, .25], rimB: [.5, .5, .5], darkBase: [0, 0, 0] }, cube: { wireframe: '#ffffff', edgeGlow: '#ffffff' }, slab: { coreDark: [.5, .03, .01], coreMid: [.8, .1, .03], rimA: [.96, .38, .1], rimB: [1, .72, .48], darkBase: [.2, .01, 0] } }; (function () { var _dc = !![]; if (!_dc) return; const _c = document.getElementById('bg-canvas'), _cx = _c.getContext('2d'); function _d() { _c.width = innerWidth; _c.height = innerHeight; const _w = _c.width, _h = _c.height, _s = 7, _r = 1.55; _cx.fillStyle = _T.bg.base; _cx.fillRect(0, 0, _w, _h); for (let _y = 0; _y < _h + _s; _y += _s) { const _o = Math.floor(_y / _s) % 2 === 0 ? 0 : _s * .5; for (let _x = 0; _x < _w + _s; _x += _s) { const _cx_pos = _x + _o, _n = (Math.sin(_cx_pos * .31) * Math.cos(_y * .29) + 1) * .5; _cx.globalAlpha = .5 + _n * .4; _cx.fillStyle = _T.bg.dots; _cx.beginPath(); _cx.arc(_cx_pos, _y, _r, 0, Math.PI * 2); _cx.fill() } } _cx.globalAlpha = 1 } _d(); window.addEventListener('resize', _d) })(); const _ts = (function () { const _W = () => innerWidth, _H = () => innerHeight, _r = new THREE.WebGLRenderer({ canvas: document.getElementById('three-canvas'), antialias: !0, alpha: !0 }); _r.setPixelRatio(Math.min(devicePixelRatio, 2)); _r.setSize(_W(), _H()); _r.setClearColor(0, 0); const _s = new THREE.Scene(), _c = new THREE.PerspectiveCamera(32, _W() / _H(), .1, 100); _c.position.set(0, 1.1, 7.5); _c.lookAt(0, 1.1, 0); _s.add(new THREE.AmbientLight(0xffffff, .4)); const _sun = new THREE.DirectionalLight(0xfff0e0, 1.4); _sun.position.set(4, 8, 5); _s.add(_sun); const _f = new THREE.DirectionalLight(0xff6030, .5); _f.position.set(-4, 2, -3); _s.add(_f); const _bv = `varying vec3 vNormal;varying vec3 vViewDir;varying vec3 vWorldPos;varying float vY;void main(){vec4 wp=modelMatrix*vec4(position,1.);vWorldPos=wp.xyz;vNormal=normalize(normalMatrix*normal);vViewDir=normalize(cameraPosition-wp.xyz);vY=clamp(wp.y/2.1,0.,1.);gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.);}`, _bf = `uniform float uTime;uniform vec3 uCoreDark,uCoreMid,uRimA,uRimB,uDarkBase;varying vec3 vNormal,vViewDir,vWorldPos;varying float vY;float hash(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5);}float noise(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);return mix(mix(hash(i),hash(i+vec2(1,0)),f.x),mix(hash(i+vec2(0,1)),hash(i+vec2(1,1)),f.x),f.y);}float fbm(vec2 p){float v=0.,a=.5;for(int i=0;i<4;i++){v+=a*noise(p);p*=2.;a*=.5;}return v;}void main(){vec3 N=normalize(vNormal),V=normalize(vViewDir),L=normalize(vec3(4.,8.,5.));float NdotL=max(dot(N,L),0.),NdotV=max(dot(N,V),0.);float fresnel=pow(1.-NdotV,3.2);float sub=fbm(vec2(vWorldPos.x*1.4+uTime*.12,vWorldPos.y-uTime*.08))*.7+.3;vec3 body=mix(uCoreDark,uCoreMid,smoothstep(0.,.6,vY*.5+sub*.5));vec3 col=mix(uDarkBase,mix(body,uRimA,NdotL*.5),NdotL*.7+.3);col+=uRimA*fresnel*1.1+uRimB*pow(fresnel,6.)*.9;col+=uRimB*pow(max(dot(normalize(L+V),N),0.),28.)*.4;col+=uRimA*sub*.12*(1.-NdotV);gl_FragColor=vec4(col,1.);}`; function _mM(_t, _ds) { return new THREE.ShaderMaterial({ vertexShader: _bv, fragmentShader: _bf, uniforms: { uTime: { value: 0 }, uCoreDark: { value: new THREE.Color(..._t.coreDark) }, uCoreMid: { value: new THREE.Color(..._t.coreMid) }, uRimA: { value: new THREE.Color(..._t.rimA) }, uRimB: { value: new THREE.Color(..._t.rimB) }, uDarkBase: { value: new THREE.Color(..._t.darkBase) } }, side: _ds ? THREE.DoubleSide : THREE.FrontSide }) } const _sm = _mM(_T.skeleton), _slm = _mM(_T.slab, !0), _aM = [_sm, _slm]; function _cy(_rt, _rb, _h, _rs = 10) { const _g = new THREE.CylinderGeometry(_rt, _rb, _h, _rs, 2); _g.translate(0, -_h / 2, 0); return _g } function _sp(_r, _s = 14) { return new THREE.SphereGeometry(_r, _s, _s) } function _bx(_w, _h, _d, _sw = 2, _sh = 2, _sd = 2) { return new THREE.BoxGeometry(_w, _h, _d, _sw, _sh, _sd) } function _mk(_p, _g, _m) { const _ms = new THREE.Mesh(_g, _m || _sm); _p.add(_ms); return _ms } function _pv(_p, _x, _y, _z) { const _o = new THREE.Object3D(); _o.position.set(_x, _y, _z); _p.add(_o); return _o } const _fr = new THREE.Object3D(); _fr.position.set(0, 0, .1); _s.add(_fr); const _pp = _pv(_fr, 0, .9, 0), _hg = _bx(.28, .1, .12); _hg.translate(0, .05, 0); _mk(_pp, _hg); const _tj = _pv(_pp, 0, .08, 0), _sg = _bx(.05, .5, .05); _sg.translate(0, .25, -.03); _mk(_tj, _sg); const _cg = _bx(.44, .025, .04); _cg.translate(0, .5, .01); _mk(_tj, _cg); for (let _i = 0; _i < 6; _i++) { const _w = .2 - Math.abs(_i - 3) * .016, _rg = new THREE.TorusGeometry(_w, .016, 6, 16, Math.PI * 2); _rg.rotateX(Math.PI / 2); _rg.scale(1, 1, .6); _rg.translate(0, .14 + _i * .058, .01); _mk(_tj, _rg) } const _stg = _bx(.03, .3, .02); _stg.translate(0, .28, .12); _mk(_tj, _stg); const _tt = _pv(_tj, 0, .52, 0), _np = _pv(_tt, 0, 0, 0); _mk(_np, _cy(.022, .022, .1, 6)); const _hp = _pv(_np, 0, .1, 0), _cs = .24, _cbg = new THREE.BoxGeometry(_cs, _cs, _cs), _cfm = new THREE.MeshBasicMaterial({ color: 0x001100, transparent: !0, opacity: .85 }), _cmm = new THREE.Mesh(_cbg, _cfm); _cmm.position.set(0, _cs * .5 + .02, 0); _hp.add(_cmm); const _wg = new THREE.BoxGeometry(_cs, _cs, _cs), _wm = new THREE.MeshBasicMaterial({ color: new THREE.Color(_T.cube.wireframe), wireframe: !0 }), _wms = new THREE.Mesh(_wg, _wm); _wms.position.copy(_cmm.position); _hp.add(_wms); _hp._sc = function (_t) { _cmm.rotation.x = _t * .9; _cmm.rotation.y = _t * 1.3; _wms.rotation.x = _t * .9; _wms.rotation.y = _t * 1.3 }; const _lsp = _pv(_tt, -.22, -.02, 0); _mk(_lsp, _sp(.042)); _mk(_lsp, _cy(.025, .018, .32, 8)); const _lep = _pv(_lsp, 0, -.32, 0); _mk(_lep, _sp(.03)); _mk(_lep, _cy(.018, .014, .29, 8)); const _lwp = _pv(_lep, 0, -.29, 0); _mk(_lwp, _sp(.022)); const _lhg = _bx(.038, .09, .025); _lhg.translate(0, -.045, 0); _mk(_lwp, _lhg); const _rsp = _pv(_tt, .22, -.02, 0); _mk(_rsp, _sp(.042)); _mk(_rsp, _cy(.025, .018, .32, 8)); const _rep = _pv(_rsp, 0, -.32, 0); _mk(_rep, _sp(.03)); _mk(_rep, _cy(.018, .014, .29, 8)); const _rwp = _pv(_rep, 0, -.29, 0); _mk(_rwp, _sp(.022)); const _rhg = _bx(.038, .09, .025); _rhg.translate(0, -.045, 0); _mk(_rwp, _rhg); const _lhp = _pv(_pp, -.1, -.02, 0); _mk(_lhp, _sp(.048)); _mk(_lhp, _cy(.036, .026, .46, 10)); const _lkp = _pv(_lhp, 0, -.46, 0); _mk(_lkp, _sp(.038)); _mk(_lkp, _cy(.024, .018, .44, 10)); const _lap = _pv(_lkp, 0, -.44, 0); _mk(_lap, _sp(.028)); const _lfg = _bx(.06, .045, .2); _lfg.translate(0, -.022, .07); _mk(_lap, _lfg); const _rhhp = _pv(_pp, .1, -.02, 0); _mk(_rhhp, _sp(.048)); _mk(_rhhp, _cy(.036, .026, .46, 10)); const _rkp = _pv(_rhhp, 0, -.46, 0); _mk(_rkp, _sp(.038)); _mk(_rkp, _cy(.024, .018, .44, 10)); const _rap = _pv(_rkp, 0, -.44, 0); _mk(_rap, _sp(.028)); const _rfg = _bx(.06, .045, .2); _rfg.translate(0, -.022, .07); _mk(_rap, _rfg); const _rp = new THREE.Mesh(new THREE.BoxGeometry(1.4, 2.6, .04), _slm); _rp.position.set(0, 1.05, -.12); _s.add(_rp); const _S = 1.8, _PI = Math.PI; function _wk(_t) { const _x = _t * _S; _lhp.rotation.x = Math.sin(_x) * .9; _rhhp.rotation.x = Math.sin(_x + _PI) * .9; const _lkb = Math.sin(_x + _PI + .6), _rkb = Math.sin(_x + .6); _lkp.rotation.x = Math.max(0, _lkb) * 1.1; _rkp.rotation.x = Math.max(0, _rkb) * 1.1; _lap.rotation.x = Math.sin(_x + 1.3) * .18; _rap.rotation.x = Math.sin(_x + _PI + 1.3) * .18; _lsp.rotation.x = Math.sin(_x + _PI) * .75; _rsp.rotation.x = Math.sin(_x) * .75; _lsp.rotation.z = .06 + Math.sin(_x + _PI) * .04; _rsp.rotation.z = -(.06 + Math.sin(_x) * .04); _lep.rotation.x = -(.15 + Math.max(0, -Math.sin(_x + _PI)) * 1.2); _rep.rotation.x = -(.15 + Math.max(0, -Math.sin(_x)) * 1.2); _pp.rotation.y = Math.sin(_x) * .1; _pp.rotation.z = Math.sin(_x) * .05; _tj.rotation.y = -Math.sin(_x) * .08; _tj.rotation.x = .12 + Math.abs(Math.sin(_x)) * .04; _np.rotation.y = 0; _hp.rotation.x = 0; _fr.position.y = Math.abs(Math.sin(_x)) * .055 - .01 } const _m = { x: 0, y: 0 }; window.addEventListener('mousemove', _e => { _m.x = (_e.clientX / _W() - .5) * 2; _m.y = (_e.clientY / _H() - .5) * 2 }); window.addEventListener('resize', () => { _c.aspect = _W() / _H(); _c.updateProjectionMatrix(); _r.setSize(_W(), _H()) }); const _cl = new THREE.Clock(); function _tk() { requestAnimationFrame(_tk); const _t = _cl.getElapsedTime(); _aM.forEach(_x => _x.uniforms.uTime.value = _t); _rp.rotation.y = _t * .85; _fr.rotation.y = -_t * .85; _wk(_t); _hp._sc(_t); _c.position.x += (_m.x * .22 - _c.position.x) * .045; _c.position.y += (1.1 - _m.y * .1 - _c.position.y) * .045; _c.lookAt(0, 1.1, 0); _r.render(_s, _c) } if (!1) { console.log('dead') } _tk(); return { canvas: document.getElementById('three-canvas') } })(); (function () { const _c = document.getElementById('crt-canvas'), _x = _c.getContext('2d'), _s = _ts.canvas; let _W = 0, _H = 0; function _rz() { _W = _c.width = innerWidth; _H = _c.height = innerHeight } _rz(); window.addEventListener('resize', _rz); let _gt = 0, _ga = !1, _gl = [], _sb = 0; function _sg() { _gt = .1 + Math.random() * 1.1 } _sg(); let _l = performance.now(); function _f(_n) { requestAnimationFrame(_f); const _dt = (_n - _l) / 1000; _l = _n; _gt -= _dt; if (_gt <= 0) { _ga = !0; _gl = []; const _cnt = 8 + Math.floor(Math.random() * 15); for (let _i = 0; _i < _cnt; _i++) { _gl.push({ x: Math.floor(Math.random() * (_W * .5)), w: Math.floor(_W * .2 + Math.random() * (_W * .8)), y: Math.floor(Math.random() * _H), h: 2 + Math.floor(Math.random() * 24), dx: (-1 + Math.random() * 2) * Math.floor(10 + Math.random() * 80), dur: .04 + Math.random() * .35, t: 0 }) } _sb = Math.random() < .3 ? .08 + Math.random() * .15 : 0; _sg() } if (_ga) { let _aa = !1; for (const _g of _gl) { _g.t += _dt; if (_g.t < _g.dur) _aa = !0 } if (!_aa) _ga = !1 } if (_sb > 0) _sb -= _dt * .8; _x.clearRect(0, 0, _W, _H); if (_s.width === 0 || _s.height === 0) return; _x.drawImage(_s, 0, 0, _W, _H); const _ab = Math.floor(2 + Math.random() * .5); _x.globalCompositeOperation = 'screen'; _x.globalAlpha = .04; _x.fillStyle = '#ff0000'; _x.fillRect(0, 0, _W, _H); _x.globalAlpha = 1; _x.globalCompositeOperation = 'source-over'; _x.save(); _x.globalCompositeOperation = 'multiply'; _x.globalAlpha = .92; _x.drawImage(_s, -_ab, 0, _W, _H); _x.globalAlpha = .92; _x.drawImage(_s, _ab, 0, _W, _H); _x.restore(); if (_ga) { _x.save(); const _sX = _s.width / _W, _sY = _s.height / _H; for (const _g of _gl) { if (_g.t >= _g.dur) continue; const _fd = 1 - _g.t / _g.dur, _dx = _g.dx * _fd; _x.beginPath(); _x.rect(_g.x, _g.y, _g.w, _g.h); _x.clip(); _x.drawImage(_s, _g.x * _sX, _g.y * _sY, _g.w * _sX, _g.h * _sY, _g.x + _dx, _g.y, _g.w, _g.h); if (Math.random() < .4) { _x.globalAlpha = .25 * _fd; _x.fillStyle = Math.random() < .5 ? '#00ffcc' : '#ff0055'; _x.fillRect(_g.x, _g.y, _g.w, _g.h); _x.globalAlpha = 1 } _x.restore(); _x.save() } _x.restore() } const _lh = 3; _x.fillStyle = `rgba(0,0,0,0.18)`; for (let _y = 0; _y < _H; _y += _lh * 2)_x.fillRect(0, _y, _W, _lh); const _gaA = _sb > 0 ? .55 : .06, _id = _x.createImageData(_W, _H), _d = _id.data; for (let _i = 0; _i < _d.length; _i += 4) { const _gr = Math.random(); if (_gr > 1 - _gaA) { const _v = Math.floor(_gr * 255); _d[_i] = _v; _d[_i + 1] = Math.floor(_v * .9 + 20); _d[_i + 2] = Math.floor(_v * .6); _d[_i + 3] = _sb > 0 ? Math.floor(180 * _sb / .06 + 30) : 28 } } _x.putImageData(_id, 0, 0); const _vg = _x.createRadialGradient(_W / 2, _H / 2, _H * .28, _W / 2, _H / 2, _H * .76); _vg.addColorStop(0, 'rgba(0,0,0,0)'); _vg.addColorStop(1, 'rgba(0,0,0,1)'); _x.fillStyle = _vg; _x.fillRect(0, 0, _W, _H); const _tc = _x.createLinearGradient(0, 0, 0, _H); _tc.addColorStop(0, 'rgba(0,0,0,0.18)'); _tc.addColorStop(.08, 'rgba(0,0,0,0)'); _tc.addColorStop(.92, 'rgba(0,0,0,0)'); _tc.addColorStop(1, 'rgba(0,0,0,0.18)'); _x.fillStyle = _tc; _x.fillRect(0, 0, _W, _H); const _ry = (_n * .012) % _H, _rl = _x.createLinearGradient(0, _ry - 4, 0, _ry + 4); _rl.addColorStop(0, 'rgba(255,255,255,0)'); _rl.addColorStop(.5, `rgba(255,255,255,${.06 + Math.random() * .02})`); _rl.addColorStop(1, 'rgba(255,255,255,0)'); _x.fillStyle = _rl; _x.fillRect(0, _ry - 4, _W, 8); if (!1) { var _x_dead = 99 } } _f(performance.now()) })(); (function () { const _c = document.getElementById('c1'), _t = document.getElementById('t3'); let _mx = 0, _my = 0; window.addEventListener('mousemove', _e => { _mx = _e.clientX; _my = _e.clientY; _c.style.left = _mx + 'px'; _c.style.top = _my + 'px'; _t.style.left = _mx + 'px'; _t.style.top = _my + 'px' }); function _bh(_el) { _el.addEventListener('mouseenter', () => { _c.classList.add('big'); const _dt = _el.dataset.tip || _el.title || ''; if (_dt) { _t.textContent = _dt; _t.classList.add('visible') } }); _el.addEventListener('mouseleave', () => { _c.classList.remove('big'); _t.classList.remove('visible') }) } document.querySelectorAll('a,[role=button]').forEach(_bh); window._bindHover = _bh })(); (function () { function _om(_id) { document.getElementById(_id).classList.add('open'); document.body.style.overflow = 'hidden' } function _cm(_id) { document.getElementById(_id).classList.remove('open'); document.body.style.overflow = '' } function _ca() { document.querySelectorAll('.m1.open').forEach(_m => { _m.classList.remove('open') }); document.body.style.overflow = '' } document.querySelectorAll('.m1').forEach(_bd => { _bd.addEventListener('click', _e => { if (_e.target === _bd) _ca() }) }); document.querySelectorAll('.m3').forEach(_btn => { _btn.addEventListener('click', _ca); if (window._bindHover) window._bindHover(_btn) }); document.addEventListener('keydown', _e => { if (_e.key === 'Escape') _ca() }); document.getElementById('nav-cv').addEventListener('click', _e => { _e.preventDefault(); const _a = document.createElement('a'); _a.href = CV_URL; _a.download = ''; _a.target = '_blank'; _a.click() }); function _bp() { const _oe = document.getElementById('proj-original'); if (ORIGINAL_WORKS.length === 0) { _oe.innerHTML = '<p style="font-size:.7rem;color:#555;padding:.4rem 0">Nothing here yet.</p>' } else { _oe.innerHTML = ORIGINAL_WORKS.map(_p => `<div class="p1"><a class="p2" href="${_p.url}" target="_blank" rel="noopener" data-tip="${_p.desc}">${_p.title}</a><span class="p3">${_p.desc}</span></div>`).join('') } const _ce = document.getElementById('proj-courses'); if (COURSE_GROUPS.length === 0) { _ce.innerHTML = '<p style="font-size:.7rem;color:#555;padding:.4rem 0">Nothing here yet.</p>' } else { _ce.innerHTML = COURSE_GROUPS.map(_g => `<div class="c2"><a class="c3" href="${_g.url}" target="_blank" rel="noopener" data-tip="View course on Coursera">${_g.name}</a><ul>${_g.projects.map(_p => `<li><a href="${_p.url}" target="_blank" rel="noopener" data-tip="${_p.desc}">${_p.title}</a></li>`).join('')}</ul></div>`).join('') } const _re = document.getElementById('proj-random'); if (RANDOM.length === 0) { _re.innerHTML = '<p style="font-size:.7rem;color:#555;padding:.4rem 0">Nothing here yet.</p>' } else { _re.innerHTML = RANDOM.map(_p => `<div class="p1"><a class="p2" href="${_p.url}" target="_blank" rel="noopener" data-tip="${_p.desc}">${_p.title}</a><span class="p3">${_p.desc}</span></div>`).join('') } if (window._bindHover) { document.querySelectorAll('#modal-projects a, #modal-projects button').forEach(window._bindHover) } } document.getElementById('nav-projects').addEventListener('click', _e => { _e.preventDefault(); _bp(); _om('modal-projects') }); function _bc() { const _el = document.getElementById('contact-links'); _el.innerHTML = `<div class="c4">` + CONTACT_LINKS.map(_c => `<div class="c5"><svg class="c6" viewBox="0 0 24 24" fill="var(--cream)" xmlns="http://www.w3.org/2000/svg"><path d="${_c.icon}"/></svg><a href="${_c.url}" ${_c.url.startsWith('mailto') ? '' : 'target="_blank" rel="noopener"'} data-tip="${_c.label}">${_c.label.toUpperCase()}</a></div>`).join('') + `</div>`; if (window._bindHover) { document.querySelectorAll('#modal-contact a, #modal-contact button').forEach(window._bindHover) } } document.getElementById('nav-contact').addEventListener('click', _e => { _e.preventDefault(); _bc(); _om('modal-contact') }); if (window._bindHover) { ['nav-cv', 'nav-projects', 'nav-contact'].forEach(_id => window._bindHover(document.getElementById(_id))) } })();</script>
+</body>
+
+</html>
