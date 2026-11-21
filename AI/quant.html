@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>The Quantization Quest: An Interactive Guide</title>
+	<script src="https://cdn.tailwindcss.com"></script>
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+	<!-- Chosen Palette: Warm Parchment -->
+	<!-- Application Structure Plan: The application is structured as a single-page vertical journey, mirroring the "Quest" metaphor from the source report. A sticky top navigation bar allows users to jump between five core thematic sections: "Foundations," "Core Mechanics," "Quantized Operations," "Advanced Techniques," and an interactive "Arena." This structure was chosen over a simple linear document to enhance usability by breaking down the dense technical content into manageable, discoverable chapters. It supports both sequential learning for novices and direct access for experts wanting to reference a specific topic, like GPTQ. Each section uses interactive components (charts, diagrams, toggles) to actively engage the user, transforming passive reading into active exploration and improving comprehension of complex topics. -->
+	<!-- Visualization & Content Choices: The application translates complex concepts from the report into interactive elements. 1) Number Formats: A static table is converted into an interactive bar chart (Chart.js) where clicking a format (e.g., 'FP16') updates the visual and a description panel, making comparison intuitive. Goal: Compare. 2) Symmetric vs. Asymmetric: A Chart.js bar chart dynamically updates on button clicks to show how each scheme handles skewed data, visually demonstrating precision loss. Goal: Compare. 3) Granularity: A diagram built with HTML/CSS visually demonstrates per-tensor, per-channel, and block-wise scopes, which is clearer than a text description. Goal: Organize/Inform. 4) Advanced Methods (PTQ/QAT): A tabbed interface presents complex methods like SmoothQuant and GPTQ in digestible chunks, each with a simplified HTML/CSS diagram to illustrate its core logic. Goal: Organize/Compare. 5) The Arena: The report's "Quests" are transformed into an interactive modal-based section, gamifying the learning process. Goal: Engage/Inform. All choices prioritize interaction and visual clarity over static text, using Chart.js for data visualization and structured HTML/CSS for diagrams, adhering to the NO SVG/Mermaid constraint. -->
+	<!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+
+	<style>
+		body {
+			font-family: 'Inter', sans-serif;
+			background-color: #FDFBF7;
+			color: #38342F;
+		}
+
+		.chart-container {
+			position: relative;
+			width: 100%;
+			max-width: 600px;
+			margin-left: auto;
+			margin-right: auto;
+			height: 300px;
+			max-height: 400px;
+		}
+
+		@media (min-width: 768px) {
+			.chart-container {
+				height: 350px;
+			}
+		}
+
+		.nav-link {
+			transition: all 0.3s ease;
+			border-bottom: 2px solid transparent;
+		}
+
+		.nav-link:hover,
+		.nav-link.active {
+			color: #C77D55;
+			border-bottom-color: #C77D55;
+		}
+
+		.quest-card {
+			transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+		}
+
+		.quest-card:hover {
+			transform: translateY(-5px);
+			box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+		}
+
+		.tab.active {
+			background-color: #C77D55;
+			color: #FDFBF7;
+		}
+	</style>
+</head>
+
+<body class="antialiased">
+
+	<header class="bg-white/80 backdrop-blur-md sticky top-0 z-50 shadow-sm">
+		<nav class="container mx-auto px-4 sm:px-6 lg:px-8">
+			<div class="flex items-center justify-between h-16">
+				<div class="flex-shrink-0">
+					<h1 class="text-xl font-bold text-[#38342F]">The Quantization Quest</h1>
+				</div>
+				<div class="hidden md:block">
+					<div class="ml-10 flex items-baseline space-x-4">
+						<a href="#level-1" class="nav-link px-3 py-2 rounded-md text-sm font-medium">Level 1: Foundations</a>
+						<a href="#level-2" class="nav-link px-3 py-2 rounded-md text-sm font-medium">Level 2: Mechanics</a>
+						<a href="#level-3" class="nav-link px-3 py-2 rounded-md text-sm font-medium">Level 3: Operations</a>
+						<a href="#level-4" class="nav-link px-3 py-2 rounded-md text-sm font-medium">Level 4: Advanced</a>
+						<a href="#arena" class="nav-link px-3 py-2 rounded-md text-sm font-medium">The Arena</a>
+					</div>
+				</div>
+			</div>
+		</nav>
+	</header>
+
+	<main class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+		<section id="level-1" class="py-16">
+			<h2 class="text-3xl font-bold text-center mb-4">Level 1: The Foundations of Numerical Precision</h2>
+			<p class="text-center max-w-3xl mx-auto text-lg text-gray-600 mb-12">This first stage establishes the "why" and
+				"what" of quantization. Here you'll learn the core motivations for compressing large models and the fundamental
+				language of numerical representation used in deep learning.</p>
+
+			<div class="grid md:grid-cols-3 gap-8 text-center mb-16">
+				<div class="bg-white p-6 rounded-lg shadow-md">
+					<div class="text-4xl mb-3">💾</div>
+					<h3 class="text-xl font-semibold mb-2">Reduced Memory</h3>
+					<p class="text-gray-600">Quantization drastically cuts a model's memory footprint by converting 32-bit float
+						weights to smaller types like 8-bit integers, making massive models accessible on consumer hardware.</p>
+				</div>
+				<div class="bg-white p-6 rounded-lg shadow-md">
+					<div class="text-4xl mb-3">⚡️</div>
+					<h3 class="text-xl font-semibold mb-2">Faster Inference</h3>
+					<p class="text-gray-600">By reducing the amount of data moved from memory to processor, quantization overcomes
+						the memory-bandwidth bottleneck, leading to significant speedups in model response time.</p>
+				</div>
+				<div class="bg-white p-6 rounded-lg shadow-md">
+					<div class="text-4xl mb-3">🔋</div>
+					<h3 class="text-xl font-semibold mb-2">Energy Efficiency</h3>
+					<p class="text-gray-600">Less data movement and faster calculations mean lower power consumption, a crucial
+						benefit for data centers and battery-powered edge devices like phones and drones.</p>
+				</div>
+			</div>
+
+			<div class="bg-white p-8 rounded-lg shadow-lg">
+				<h3 class="text-2xl font-bold text-center mb-2">A Lexicon of Numbers</h3>
+				<p class="text-center max-w-2xl mx-auto text-gray-600 mb-8">Neural networks speak in numbers. Understanding
+					their different dialects—from high-precision floats to compact integers—is key. Click on a format to see its
+					structure and purpose.</p>
+				<div class="flex justify-center flex-wrap gap-2 mb-8" id="numberFormatSelector">
+				</div>
+				<div class="grid md:grid-cols-2 gap-8 items-center">
+					<div class="chart-container">
+						<canvas id="numberFormatChart"></canvas>
+					</div>
+					<div id="numberFormatInfo" class="p-4 bg-gray-50 rounded-lg">
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<hr class="my-16 border-gray-200">
+
+		<section id="level-2" class="py-16">
+			<h2 class="text-3xl font-bold text-center mb-4">Level 2: The Mechanics of Linear Quantization</h2>
+			<p class="text-center max-w-3xl mx-auto text-lg text-gray-600 mb-12">Moving from "why" to "how," this section
+				covers the practical implementation of a quantizer. You'll explore how to calculate key parameters and the
+				trade-offs between different schemes and granularities.</p>
+
+			<div class="bg-white p-8 rounded-lg shadow-lg mb-16">
+				<h3 class="text-2xl font-bold text-center mb-2">Symmetric vs. Asymmetric Quantization</h3>
+				<p class="text-center max-w-2xl mx-auto text-gray-600 mb-8">The two primary modes of linear quantization offer a
+					trade-off between precision and computational speed. Interact with the chart below to see how each scheme
+					handles a skewed data distribution, like the output of a ReLU activation.</p>
+				<div class="flex justify-center gap-4 mb-8">
+					<button id="asymmetricBtn"
+						class="px-4 py-2 bg-[#C77D55] text-white rounded-md shadow-sm hover:bg-[#b36d4a] transition">Asymmetric</button>
+					<button id="symmetricBtn"
+						class="px-4 py-2 bg-gray-200 text-gray-800 rounded-md shadow-sm hover:bg-gray-300 transition">Symmetric</button>
+				</div>
+				<div class="grid md:grid-cols-2 gap-8 items-center">
+					<div class="chart-container">
+						<canvas id="schemeChart"></canvas>
+					</div>
+					<div id="schemeInfo" class="p-4 bg-gray-50 rounded-lg min-h-[200px]">
+					</div>
+				</div>
+			</div>
+
+			<div class="bg-white p-8 rounded-lg shadow-lg">
+				<h3 class="text-2xl font-bold text-center mb-2">The Art of Granularity</h3>
+				<p class="text-center max-w-2xl mx-auto text-gray-600 mb-8">The scope at which quantization parameters are
+					applied has a profound impact on precision. Explore how different granularities adapt to the statistical
+					landscape within a tensor.</p>
+				<div class="flex justify-center gap-4 mb-8">
+					<button onclick="updateGranularity('tensor')"
+						class="granularity-btn px-4 py-2 bg-[#C77D55] text-white rounded-md shadow-sm">Per-Tensor</button>
+					<button onclick="updateGranularity('channel')"
+						class="granularity-btn px-4 py-2 bg-gray-200 rounded-md shadow-sm">Per-Channel</button>
+					<button onclick="updateGranularity('block')"
+						class="granularity-btn px-4 py-2 bg-gray-200 rounded-md shadow-sm">Block-Wise</button>
+				</div>
+				<div class="grid md:grid-cols-2 gap-8 items-center">
+					<div id="granularity-vis" class="w-full h-64 bg-gray-100 rounded-lg p-4 flex flex-col gap-2 relative">
+						<div class="absolute top-2 left-4 text-sm font-semibold text-gray-500">Weight Tensor</div>
+					</div>
+					<div id="granularity-info" class="p-4 bg-gray-50 rounded-lg min-h-[200px]">
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<hr class="my-16 border-gray-200">
+
+		<section id="level-3" class="py-16">
+			<h2 class="text-3xl font-bold text-center mb-4">Level 3: Forging Quantized Operations</h2>
+			<p class="text-center max-w-3xl mx-auto text-lg text-gray-600 mb-12">Here, you'll tackle the dynamic world of
+				computation. This level focuses on rebuilding the arithmetic heart of a neural network, the matrix
+				multiplication (GEMM), to work entirely in the integer domain.</p>
+
+			<div class="bg-white p-8 rounded-lg shadow-lg">
+				<h3 class="text-2xl font-bold text-center mb-2">Quantized Matrix Multiplication (GEMM)</h3>
+				<p class="text-center max-w-2xl mx-auto text-gray-600 mb-8">Performing matrix multiplication with quantized
+					values requires a special process to maintain accuracy and efficiency. Click through the steps to see how it
+					works.</p>
+				<div id="gemm-flow" class="flex flex-col md:flex-row justify-center items-center gap-4 md:gap-2 text-center">
+				</div>
+				<div id="gemm-info" class="mt-8 p-6 bg-gray-50 rounded-lg min-h-[150px] max-w-3xl mx-auto">
+				</div>
+				<div class="text-center mt-8">
+					<button id="gemm-step-btn"
+						class="px-6 py-2 bg-[#C77D55] text-white rounded-md shadow-sm hover:bg-[#b36d4a] transition">Next
+						Step</button>
+				</div>
+			</div>
+		</section>
+
+		<hr class="my-16 border-gray-200">
+
+		<section id="level-4" class="py-16">
+			<h2 class="text-3xl font-bold text-center mb-4">Level 4: Advanced LLM Quantization</h2>
+			<p class="text-center max-w-3xl mx-auto text-lg text-gray-600 mb-12">Ascend to the expert level. This section
+				confronts the unique challenges of modern transformers, particularly the "outlier phenomenon," and explores the
+				state-of-the-art techniques invented to solve it.</p>
+
+			<div class="bg-white p-8 rounded-lg shadow-lg">
+				<div class="mb-4 border-b border-gray-200">
+					<ul class="flex flex-wrap -mb-px text-sm font-medium text-center" id="advanced-tabs">
+						<li class="mr-2"><a href="#" class="inline-block p-4 border-b-2 rounded-t-lg tab active"
+								data-tab="outliers">The Outlier Problem</a></li>
+						<li class="mr-2"><a href="#" class="inline-block p-4 border-b-2 rounded-t-lg tab"
+								data-tab="llm-int8">LLM.int8()</a></li>
+						<li class="mr-2"><a href="#" class="inline-block p-4 border-b-2 rounded-t-lg tab"
+								data-tab="smoothquant">SmoothQuant</a></li>
+						<li class="mr-2"><a href="#" class="inline-block p-4 border-b-2 rounded-t-lg tab" data-tab="gptq">GPTQ</a>
+						</li>
+						<li class="mr-2"><a href="#" class="inline-block p-4 border-b-2 rounded-t-lg tab" data-tab="qat">QAT</a>
+						</li>
+					</ul>
+				</div>
+				<div id="advanced-content">
+				</div>
+			</div>
+		</section>
+
+		<hr class="my-16 border-gray-200">
+
+		<section id="arena" class="py-16">
+			<h2 class="text-3xl font-bold text-center mb-4">The Arena: Challenges & Achievements</h2>
+			<p class="text-center max-w-3xl mx-auto text-lg text-gray-600 mb-12">Theory is one thing, practice is another.
+				Solidify your knowledge by taking on these practical coding challenges. Click a quest to view the details and
+				prove your mastery.</p>
+			<div id="quest-board" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+			</div>
+		</section>
+	</main>
+
+	<div id="quest-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50 p-4">
+		<div class="bg-white rounded-lg shadow-xl max-w-2xl w-full p-8 relative">
+			<button id="close-modal-btn"
+				class="absolute top-4 right-4 text-gray-500 hover:text-gray-800 text-2xl">&times;</button>
+			<h3 id="modal-title" class="text-2xl font-bold mb-4"></h3>
+			<div id="modal-badge" class="text-center mb-4"></div>
+			<p id="modal-task" class="text-gray-600 mb-4"></p>
+			<div id="modal-code" class="bg-gray-800 text-white p-4 rounded-md font-mono text-sm overflow-x-auto"></div>
+		</div>
+	</div>
+
+
+	<script>
+		document.addEventListener('DOMContentLoaded', function () {
+
+			const numberFormatData = {
+				'FP32': { bits: 32, sign: 1, exponent: 8, mantissa: 23, range: 'Very High', precision: 'High', use: 'Model Training, FP Baseline', desc: 'The 32-bit "gold standard," prized for its robustness and high precision. It offers a wide dynamic range and is the safe, reliable choice for training.' },
+				'FP16': { bits: 16, sign: 1, exponent: 5, mantissa: 10, range: 'Low', precision: 'Medium', use: 'Mixed-Precision Training', desc: 'A 16-bit format that halves memory but has a much lower dynamic range, making it susceptible to overflow/underflow errors during training.' },
+				'BFloat16': { bits: 16, sign: 1, exponent: 8, mantissa: 7, range: 'Very High', precision: 'Low', use: 'Mixed-Precision Training', desc: 'A 16-bit format that sacrifices precision to retain the same dynamic range as FP32, making it more stable for training large models.' },
+				'INT8': { bits: 8, sign: 1, exponent: 0, mantissa: 0, range: 'Fixed', precision: 'Fixed', use: 'Inference', desc: 'The 8-bit workhorse of efficient inference. It represents 256 distinct values and is highly optimized in modern hardware.' },
+				'INT4': { bits: 4, sign: 1, exponent: 0, mantissa: 0, range: 'Very Fixed', precision: 'Very Fixed', use: 'Aggressive Inference', desc: 'A 4-bit format offering extreme compression (16 values). It requires advanced techniques to use without significant accuracy loss.' },
+			};
+
+			let numberFormatChart;
+			const numberFormatSelector = document.getElementById('numberFormatSelector');
+			const numberFormatInfo = document.getElementById('numberFormatInfo');
+			const numberFormatCtx = document.getElementById('numberFormatChart').getContext('2d');
+
+			function initNumberFormatChart() {
+				const selectorButtons = Object.keys(numberFormatData).map(key =>
+					`<button class="px-3 py-1.5 text-sm font-medium rounded-md shadow-sm transition" data-format="${key}">${key}</button>`
+				).join('');
+				numberFormatSelector.innerHTML = selectorButtons;
+
+				numberFormatChart = new Chart(numberFormatCtx, {
+					type: 'bar',
+					data: {
+						labels: ['Sign', 'Exponent', 'Mantissa'],
+						datasets: [{
+							label: 'Bit Allocation',
+							data: [],
+							backgroundColor: ['#6B7280', '#C77D55', '#E5E7EB'],
+						}]
+					},
+					options: {
+						responsive: true,
+						maintainAspectRatio: false,
+						indexAxis: 'y',
+						scales: {
+							x: { stacked: true, display: false },
+							y: { stacked: true, grid: { display: false } }
+						},
+						plugins: {
+							legend: { display: false },
+							tooltip: { enabled: false }
+						}
+					}
+				});
+
+				numberFormatSelector.addEventListener('click', (e) => {
+					if (e.target.tagName === 'BUTTON') {
+						const format = e.target.dataset.format;
+						updateNumberFormat(format);
+					}
+				});
+
+				updateNumberFormat('FP32');
+			}
+
+			function updateNumberFormat(format) {
+				const data = numberFormatData[format];
+				if (!data) return;
+
+				numberFormatChart.data.datasets[0].data = [data.sign, data.exponent, data.mantissa];
+				numberFormatChart.update();
+
+				numberFormatInfo.innerHTML = `
+                    <h4 class="text-xl font-bold mb-2">${format}</h4>
+                    <p class="text-gray-700 mb-4">${data.desc}</p>
+                    <div class="text-sm space-y-2">
+                        <p><strong>Total Bits:</strong> <span class="font-mono text-[#C77D55]">${data.bits}</span></p>
+                        <p><strong>Dynamic Range:</strong> <span class="font-mono text-[#C77D55]">${data.range}</span></p>
+                        <p><strong>Precision:</strong> <span class="font-mono text-[#C77D55]">${data.precision}</span></p>
+                        <p><strong>Primary Use:</strong> <span class="font-mono text-[#C77D55]">${data.use}</span></p>
+                    </div>
+                `;
+
+				document.querySelectorAll('#numberFormatSelector button').forEach(btn => {
+					btn.classList.toggle('bg-[#C77D55]', btn.dataset.format === format);
+					btn.classList.toggle('text-white', btn.dataset.format === format);
+					btn.classList.toggle('bg-gray-200', btn.dataset.format !== format);
+					btn.classList.toggle('text-gray-800', btn.dataset.format !== format);
+				});
+			}
+
+			let schemeChart;
+			const schemeInfo = document.getElementById('schemeInfo');
+			const schemeCtx = document.getElementById('schemeChart').getContext('2d');
+			const asymmetricBtn = document.getElementById('asymmetricBtn');
+			const symmetricBtn = document.getElementById('symmetricBtn');
+
+			function initSchemeChart() {
+				const baseData = Array.from({ length: 20 }, (_, i) => Math.max(0, (Math.random() * 10) - 2 * Math.random()));
+				const labels = baseData.map((_, i) => `v${i + 1}`);
+
+				schemeChart = new Chart(schemeCtx, {
+					type: 'bar',
+					data: {
+						labels: labels,
+						datasets: [{
+							label: 'Original Values',
+							data: baseData,
+							backgroundColor: '#E5E7EB',
+							borderColor: '#D1D5DB',
+							borderWidth: 1
+						}, {
+							label: 'Quantized Levels',
+							type: 'line',
+							data: [],
+							borderColor: '#C77D55',
+							backgroundColor: 'rgba(199, 125, 85, 0.2)',
+							stepped: true,
+							fill: true,
+							pointRadius: 0
+						}]
+					},
+					options: {
+						responsive: true,
+						maintainAspectRatio: false,
+						scales: { y: { beginAtZero: true } },
+						plugins: { legend: { display: false } }
+					}
+				});
+
+				asymmetricBtn.addEventListener('click', () => updateScheme('asymmetric'));
+				symmetricBtn.addEventListener('click', () => updateScheme('symmetric'));
+				updateScheme('asymmetric');
+			}
+
+			function updateScheme(scheme) {
+				asymmetricBtn.classList.toggle('bg-[#C77D55]', scheme === 'asymmetric');
+				asymmetricBtn.classList.toggle('text-white', scheme === 'asymmetric');
+				asymmetricBtn.classList.toggle('bg-gray-200', scheme !== 'asymmetric');
+				symmetricBtn.classList.toggle('bg-[#C77D55]', scheme === 'symmetric');
+				symmetricBtn.classList.toggle('text-white', scheme === 'symmetric');
+				symmetricBtn.classList.toggle('bg-gray-200', scheme !== 'symmetric');
+
+				const originalData = schemeChart.data.datasets[0].data;
+				const r_max = Math.max(...originalData);
+				const r_min = Math.min(...originalData);
+				let quantizedLevels;
+
+				if (scheme === 'asymmetric') {
+					const scale = (r_max - r_min) / 255;
+					quantizedLevels = originalData.map(v => Math.round((v - r_min) / scale) * scale + r_min);
+					schemeInfo.innerHTML = `
+                        <h4 class="font-bold text-lg mb-2">Asymmetric (Affine)</h4>
+                        <p class="text-gray-600">Uses both a scale and zero-point to map the exact range [${r_min.toFixed(2)}, ${r_max.toFixed(2)}] to the full integer range. This is highly precise for skewed data but adds a small computational cost (a subtraction).</p>
+                    `;
+				} else {
+					const abs_max = Math.max(Math.abs(r_min), r_max);
+					const scale = abs_max / 127;
+					quantizedLevels = originalData.map(v => Math.round(v / scale) * scale);
+					schemeInfo.innerHTML = `
+                        <h4 class="font-bold text-lg mb-2">Symmetric</h4>
+                        <p class="text-gray-600">Maps a symmetric range [-${abs_max.toFixed(2)}, ${abs_max.toFixed(2)}] by fixing the zero-point to 0. This is faster (no subtraction) but can be wasteful for skewed data, as half the integer range goes unused, effectively losing precision.</p>
+                    `;
+				}
+				schemeChart.data.datasets[1].data = quantizedLevels;
+				schemeChart.update();
+			}
+
+			const granularityVis = document.getElementById('granularity-vis');
+			const granularityInfo = document.getElementById('granularity-info');
+			function updateGranularity(type) {
+				granularityVis.innerHTML = '';
+				let infoText = '';
+				let html = '';
+
+				if (type === 'tensor') {
+					html = `<div class="w-full h-full border-4 border-[#C77D55] rounded-md flex items-center justify-center text-[#C77D55] font-bold">1 Scale & Zero-Point</div>`;
+					infoText = `<h4 class="font-bold text-lg mb-2">Per-Tensor</h4><p class="text-gray-600">The simplest approach. A single scale and zero-point are calculated for the entire tensor. It's fast but very sensitive to outliers, which can "crush" the precision of all other values.</p>`;
+				} else if (type === 'channel') {
+					html = Array.from({ length: 4 }).map(() =>
+						`<div class="w-full flex-1 border-2 border-[#C77D55] rounded-md flex items-center justify-center text-[#C77D55] font-semibold">S & Z</div>`
+					).join('');
+					infoText = `<h4 class="font-bold text-lg mb-2">Per-Channel</h4><p class="text-gray-600">A more precise method where a separate scale and zero-point are calculated for each channel (or row/column). This isolates the effect of outliers to their own channel, preserving precision for others.</p>`;
+				} else { // block
+					html = Array.from({ length: 4 }).map(() =>
+						`<div class="w-full flex-1 flex gap-2">${Array.from({ length: 4 }).map(() => `<div class="flex-1 border border-[#C77D55] rounded-sm flex items-center justify-center text-xs text-[#C77D55]">S,Z</div>`).join('')}</div>`
+					).join('');
+					infoText = `<h4 class="font-bold text-lg mb-2">Block-Wise</h4><p class="text-gray-600">The finest granularity. The tensor is split into small blocks, each with its own scale and zero-point. This is essential for LLMs to handle the "activation outlier" problem, confining their impact to a tiny local block.</p>`;
+				}
+
+				granularityVis.innerHTML = html;
+				granularityInfo.innerHTML = infoText;
+
+				document.querySelectorAll('.granularity-btn').forEach(btn => {
+					const btnType = btn.textContent.toLowerCase().replace('-', '');
+					const currentType = type.replace('-', '');
+					btn.classList.toggle('bg-[#C77D55]', btnType.startsWith(currentType));
+					btn.classList.toggle('text-white', btnType.startsWith(currentType));
+					btn.classList.toggle('bg-gray-200', !btnType.startsWith(currentType));
+				});
+			}
+			updateGranularity('tensor');
+
+			const gemmFlow = document.getElementById('gemm-flow');
+			const gemmInfo = document.getElementById('gemm-info');
+			const gemmStepBtn = document.getElementById('gemm-step-btn');
+			let currentGemmStep = 0;
+			const gemmSteps = [
+				{ name: 'Inputs', info: 'Start with two quantized integer matrices (e.g., INT8) and their corresponding float scales (S) and integer zero-points (Z).' },
+				{ name: 'INT32 Accumulator', info: 'The product of two INT8 values can exceed an 8-bit or 16-bit range. To prevent overflow, the multiplication results are accumulated in a high-precision INT32 matrix.' },
+				{ name: 'Integer MatMul', info: 'The core matrix multiplication is performed using efficient integer-only arithmetic. The formula is: Accumulator += (X_val - Z_x) * (W_val - Z_w).' },
+				{ name: 'Requantize', info: 'The high-precision INT32 result is scaled back down to the target low-precision format (e.g., INT8) using a calculated requantization multiplier, making it ready for the next layer.' },
+				{ name: 'Output', info: 'The final result is a new quantized integer matrix, representing the output of the layer.' },
+			];
+
+			function updateGemmFlow() {
+				gemmFlow.innerHTML = gemmSteps.map((step, i) => `
+                    <div class="flex items-center ${i > 0 ? 'hidden md:flex' : ''}">
+                        <div class="p-4 rounded-lg border-2 ${i === currentGemmStep ? 'bg-[#C77D55] text-white border-[#C77D55]' : 'bg-white border-gray-300'} transition">${step.name}</div>
+                        ${i < gemmSteps.length - 1 ? '<div class="w-8 h-1 bg-gray-300 mx-2"></div>' : ''}
+                    </div>
+                `).join('');
+				gemmInfo.innerHTML = `<h4 class="font-bold text-lg mb-2">${gemmSteps[currentGemmStep].name}</h4><p class="text-gray-600">${gemmSteps[currentGemmStep].info}</p>`;
+				if (currentGemmStep >= gemmSteps.length - 1) {
+					gemmStepBtn.textContent = 'Reset';
+				} else {
+					gemmStepBtn.textContent = 'Next Step';
+				}
+			}
+			gemmStepBtn.addEventListener('click', () => {
+				currentGemmStep = (currentGemmStep + 1) % gemmSteps.length;
+				updateGemmFlow();
+			});
+			updateGemmFlow();
+
+			const advancedTabs = document.getElementById('advanced-tabs');
+			const advancedContent = document.getElementById('advanced-content');
+			const advancedData = {
+				outliers: {
+					title: "The Outlier Phenomenon",
+					content: "Large Language Models develop strong, systematic outliers in their activation tensors. These are not noise but functionally critical values, often 100x larger than others. Naive quantization fails because these outliers create a massive value range, forcing a coarse quantization grid that destroys the precision of all normal values. This is the central problem advanced techniques must solve."
+				},
+				'llm-int8': {
+					title: "LLM.int8(): Isolate the Outliers",
+					content: "This method uses a mixed-precision approach. It identifies the few activation channels containing outliers and computes their matrix multiplication in high precision (FP16). The vast majority of 'normal' values are computed in efficient INT8. The two results are then combined. It solves the problem by simply not quantizing the problematic values."
+				},
+				smoothquant: {
+					title: "SmoothQuant: Migrate the Difficulty",
+					content: "An elegant solution that shifts the quantization difficulty. It uses a mathematical transform to 'smooth' the activations by scaling down the outliers. To keep the mathematical result the same, an inverse scaling is applied to the model's weights. This moves the problem from the hard-to-quantize activations to the easier-to-quantize weights."
+				},
+				gptq: {
+					title: "GPTQ: Compensate for the Error",
+					content: "Instead of pre-processing, GPTQ makes smarter rounding decisions. It quantizes weights one by one. After quantizing a weight, it calculates the error introduced and immediately updates all *remaining* unquantized weights to compensate for that error. This greedy, error-aware approach leads to extremely high accuracy for post-training quantization."
+				},
+				qat: {
+					title: "QAT: Training with Constraints",
+					content: "Quantization-Aware Training offers the highest possible fidelity. It inserts 'fake quantizers' into the model during the training loop. These simulate the noise and error of quantization, forcing the model to learn weights that are inherently robust to low-precision arithmetic from the start. It's computationally expensive but highly effective."
+				}
+			};
+
+			function updateAdvancedTab(tabName) {
+				const data = advancedData[tabName];
+				advancedContent.innerHTML = `
+                    <div class="p-4">
+                        <h3 class="text-xl font-bold mb-2">${data.title}</h3>
+                        <p class="text-gray-600 leading-relaxed">${data.content}</p>
+                    </div>
+                `;
+				document.querySelectorAll('#advanced-tabs .tab').forEach(tab => {
+					tab.classList.toggle('active', tab.dataset.tab === tabName);
+					tab.classList.toggle('border-transparent', tab.dataset.tab !== tabName);
+					tab.classList.toggle('hover:text-gray-600', tab.dataset.tab !== tabName);
+					tab.classList.toggle('hover:border-gray-300', tab.dataset.tab !== tabName);
+				});
+			}
+
+			advancedTabs.addEventListener('click', (e) => {
+				e.preventDefault();
+				if (e.target.classList.contains('tab')) {
+					updateAdvancedTab(e.target.dataset.tab);
+				}
+			});
+			updateAdvancedTab('outliers');
+
+			const quests = [
+				{
+					title: "The Duality Challenge",
+					badge: "Badge of Precision 🏅",
+					task: "Implement a function that quantizes a tensor using both 'symmetric' and 'asymmetric' modes. Test it on a skewed tensor (e.g., post-ReLU) and assert that asymmetric quantization yields a lower Mean Squared Error.",
+					code: `function quantize(tensor, mode):\n  # ... your implementation ...\n\n# Test with a skewed tensor\ntensor = relu(random_tensor)\nMSE_asym = calculate_mse(tensor, 'asymmetric')\nMSE_sym = calculate_mse(tensor, 'symmetric')\nassert MSE_asym < MSE_sym`
+				},
+				{
+					title: "The Granularity Ladder",
+					badge: "Insignia of Adaptability 🛡️",
+					task: "Create a sample tensor with a known outlier in one channel. Quantize it using per-tensor, per-channel, and block-wise methods. Demonstrate that block-wise quantization results in the lowest overall error.",
+					code: `outlier_tensor = create_tensor_with_outlier()\n\nMSE_tensor = mse(outlier_tensor, 'per-tensor')\nMSE_channel = mse(outlier_tensor, 'per-channel')\nMSE_block = mse(outlier_tensor, 'block-wise')\n\nprint(f"MSEs: {MSE_tensor}, {MSE_channel}, {MSE_block}")`
+				},
+				{
+					title: "The Packer's Gauntlet",
+					badge: "Seal of Efficiency ⚙️",
+					task: "Write functions to pack four 2-bit integers into a single 8-bit byte and an unpacker to reverse the process. Test that unpacking the packed values perfectly reconstructs the original data.",
+					code: `function pack_int2s(values):\n  # bitwise operations here...\n\nfunction unpack_int2s(byte):\n  # bitwise operations here...\n\noriginal = [0, 1, 2, 3]\npacked = pack_int2s(original)\nreconstructed = unpack_int2s(packed)\nassert original == reconstructed`
+				},
+				{
+					title: "The Smoothing Ritual",
+					badge: "Talisman of Migration 🧿",
+					task: "Implement the core SmoothQuant transformation. For a sample activation X (with an outlier) and weight W, calculate the smoothing factor 's' and produce the transformed tensors X' and W'. Verify that X @ W is approximately equal to X' @ W'.",
+					code: `X, W = create_tensors_with_outlier()\ns = calculate_smoothing_factor(X, W)\n\nX_prime = X / s\nW_prime = W * s\n\nassert is_approx_equal(X @ W, X_prime @ W_prime)`
+				}
+			];
+			const questBoard = document.getElementById('quest-board');
+			const modal = document.getElementById('quest-modal');
+			const closeModalBtn = document.getElementById('close-modal-btn');
+
+			questBoard.innerHTML = quests.map((quest, i) => `
+                <div class="quest-card bg-white p-6 rounded-lg shadow-md cursor-pointer" data-quest-id="${i}">
+                    <h4 class="text-xl font-semibold mb-2">${quest.title}</h4>
+                    <p class="text-gray-500 mb-4">${quest.task.substring(0, 100)}...</p>
+                    <div class="text-right font-bold text-[#C77D55]">${quest.badge}</div>
+                </div>
+            `).join('');
+
+			questBoard.addEventListener('click', (e) => {
+				const card = e.target.closest('.quest-card');
+				if (card) {
+					const questId = card.dataset.questId;
+					const quest = quests[questId];
+					document.getElementById('modal-title').textContent = quest.title;
+					document.getElementById('modal-badge').textContent = quest.badge;
+					document.getElementById('modal-task').textContent = quest.task;
+					document.getElementById('modal-code').innerHTML = `<pre><code>${quest.code}</code></pre>`;
+					modal.classList.remove('hidden');
+					modal.classList.add('flex');
+				}
+			});
+
+			closeModalBtn.addEventListener('click', () => {
+				modal.classList.add('hidden');
+				modal.classList.remove('flex');
+			});
+			modal.addEventListener('click', (e) => {
+				if (e.target === modal) {
+					modal.classList.add('hidden');
+					modal.classList.remove('flex');
+				}
+			});
+
+			initNumberFormatChart();
+			initSchemeChart();
+		});
+	</script>
+</body>
+
+</html>
